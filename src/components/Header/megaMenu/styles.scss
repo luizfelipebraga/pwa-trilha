@@ -1,0 +1,16 @@
+.box {
+  display: flex;
+  align-items: center;
+
+  color: var(--red) !important;
+  text-transform: uppercase;
+
+  &:not(:last-child)::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 1.1rem;
+    margin-right: 1rem;
+    background-color: #000;
+  }
+}

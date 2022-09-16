@@ -1,0 +1,23 @@
+.isMenuActive {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+
+  &:not(:first-child)::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 1.1rem;
+    margin-right: 1rem;
+    background-color: #000;
+  }
+}
+
+.isActive {
+  color: var(--red);
+  text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
+
+  
+}

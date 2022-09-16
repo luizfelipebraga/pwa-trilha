@@ -1,0 +1,46 @@
+
+.listDots {
+  margin: 0px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1rem;
+
+  li {
+    font-size: 1rem !important;
+    letter-spacing: .06rem !important;
+
+    height: auto !important;
+    min-width: 16rem !important;
+
+    margin-top: -5rem !important;
+
+    color: #14214e !important;
+    background: #fff !important;
+    border-color: #000 !important;
+    border-width: 2px !important;
+  }
+
+  span {
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+  }
+}
+
+.miniDots {
+  margin: 0px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1rem;
+
+  li {
+    color: #14214e !important;
+    background: #fff !important;
+  }
+
+  span {
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+  }
+}

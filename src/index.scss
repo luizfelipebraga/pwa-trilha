@@ -1,0 +1,99 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+:global {
+  @import 'node_modules/slick-carousel/slick/slick';
+}
+
+:root {
+  @import 'node_modules/slick-carousel/slick/slick';
+  /* Main Colors */
+  --blue: #14214E;
+  --red: #C70041;
+  --cyan: #10B789;
+  --gray: #707070;
+  --lightGray: #D7D7D7;
+
+  /* buttons */
+  --cyanButton: var(--cyan);
+  --blueButton: var(--blue);
+  --grayButton: var(--lightGray);
+
+  --hoverCyanButton: #0b7457;
+  --hoverBlueButton: var(--red);
+  --hoverGrayButton: var(--cyan);
+}
+
+.button__cyan {
+  color: var(--cyanButton);
+
+  &:hover {
+    color: var(--hoverCyanButton);
+  }
+}
+
+.button__blue {
+  color: var(--cyanButton);
+
+  &:hover {
+    color: var(--hoverCyanButton);
+  }
+}
+
+.button__gray {
+  color: var(--cyanButton);
+
+  &:hover {
+    color: var(--hoverCyanButton);
+  }
+}
+
+h1 {
+  color: var(--blue);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+h2 {
+  color: var(--blue);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 48px;
+}
+
+h3 {
+  color: var(--blue);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600 !important;
+  line-height: 48px;
+}
+
+.pagebuilder-slider {
+  .slick-dots {
+    li {
+      button {
+        padding: 1rem;
+      }
+    }
+  }
+}
+
+.bg-brand-dark {
+  background-color: red !important;
+}
+
+.banner-content-4du > p > span {
+  font-weight: 700 !important;
+}
+
+#html-body [data-content-type="banner-styles"].banner-button-18m > button {
+  background: var(--red) !important;
+}
