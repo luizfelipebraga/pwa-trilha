@@ -3,7 +3,6 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 1rem;
 
   li {
     font-size: 1rem !important;
@@ -16,8 +15,8 @@
 
     color: #14214e !important;
     background: #fff !important;
-    border-color: #000 !important;
-    border-width: 2px !important;
+    border: 1px solid #262626 !important;
+    border-top: 1px solid #d7d7d7!important;
   }
 
   span {
