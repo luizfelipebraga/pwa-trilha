@@ -1,0 +1,46 @@
+.container {
+  margin-top: 3rem;
+  width: 100%;
+  background-color: var(--blue);
+}
+
+.box {
+  padding: 0.5rem 3rem;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+
+  @media(max-width: 720px) {
+    flex-wrap: wrap;
+  }
+
+  p {
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    font-weight: 700;
+    color: #fff;
+    width: 100%;
+  }
+
+  input {
+    padding: .5rem;
+    border: 0;
+    outline: 0;
+    width: 100%;
+  }
+}
+
+.newsLetterButton {
+  letter-spacing: 1.6px;
+  border-radius: 5px;
+  font-weight: 700;
+  padding: .5rem 2rem;
+  
+  color: #fff;
+  background-color: #cdb44d;
+}

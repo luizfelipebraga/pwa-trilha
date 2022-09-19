@@ -62,7 +62,7 @@ const Footer = props => {
         <footer data-cy="Footer-root" className={classes.root}>
             <div className={styles.root}>
                 {linkGroups}
-                <div className={classes.callout} style={{lineHeight: '18px'}}>
+                <div className={classes.callout} style={{lineHeight: '18px', marginRight: '0', marginLeft: '0'}}>
                     <span
                         data-cy="Footer-calloutHeading"
                         className={classes.calloutHeading}

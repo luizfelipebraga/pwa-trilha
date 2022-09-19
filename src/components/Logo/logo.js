@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import Image from '@magento/venia-ui/lib/components/Image/index.js';
-import logo from './TruckLogo.svg';
+import logo from '../../assets/TruckLogo.svg';
 
 /**
  * A component that renders a logo in the header.

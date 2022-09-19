@@ -14,10 +14,11 @@ ul li:first-child .labelTitle {
 }
 
 .root {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10rem;
+  gap: 3rem;
   margin: 0 auto;
 
   padding: 0 5rem;

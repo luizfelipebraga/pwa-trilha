@@ -1,8 +1,8 @@
 import React from 'react';
-import truckImage from '../truck-banner.png';
+import truckImage from '../../../assets/truck-banner.png';
 import styles from './styles.scss';
 
-const Banner1 = ({ title = '', subtitle = '' }) => {
+const BannerContent = ({ title = '', subtitle = '' }) => {
   return (
     <div className={styles.container}>
       <div className={styles.box}>
@@ -17,4 +17,4 @@ const Banner1 = ({ title = '', subtitle = '' }) => {
   )
 }
 
-export default Banner1;
+export default BannerContent;

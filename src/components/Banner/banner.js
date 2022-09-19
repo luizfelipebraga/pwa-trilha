@@ -1,9 +1,34 @@
 import React, { Component } from "react";
 import SlickSlider from "react-slick";
 import sliderClasses from "@magento/pagebuilder/lib/ContentTypes/Slider/slider.module.css";
-import truckBanner from './truck-banner.png';
 import style from './style.scss';
-import Banner1 from "./banner1";
+import BannerContent from "./Content";
+
+import ArrowLeft from '../../assets/arrow-left.png';
+import ArrowRight from '../../assets/arrow-right.png';
+
+function SamplePrevArrow(props) {
+  const { className, onClick } = props;
+  return (
+    <img
+      src={ArrowLeft}
+      className={className}
+      onClick={onClick}
+    />
+  );
+}
+
+function SampleNextArrow(props) {
+  const { className, onClick } = props;
+  return (
+    <img
+      src={ArrowRight}
+      className={className}
+      onClick={onClick}
+    />
+  );
+}
+
 
 export default class AppendDots extends Component {
   render() {
@@ -22,6 +47,8 @@ export default class AppendDots extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             infinite: true,
+            prevArrow: <SamplePrevArrow />,
+            nextArrow: <SampleNextArrow />,
             dots: true,
             dotsClass: `slick-dots`,
             appendDots: dots => (
@@ -86,16 +113,16 @@ export default class AppendDots extends Component {
       <div className={sliderClasses.root}>
         <SlickSlider {...settings}>
           <div>
-            <Banner1 title="garantia no" subtitle="mundo inteiro" />
+            <BannerContent title="garantia no" subtitle="mundo inteiro" />
           </div>
           <div>
-            <Banner1 title="qualidade" subtitle="superior" />
+            <BannerContent title="qualidade" subtitle="superior" />
           </div>
           <div>
-            <Banner1 title="entrega" subtitle="global" />
+            <BannerContent title="entrega" subtitle="global" />
           </div>
           <div>
-            <Banner1 title="programas de" subtitle="manutencao" />
+            <BannerContent title="programas de" subtitle="manutencao" />
           </div>
         </SlickSlider>
       </div>

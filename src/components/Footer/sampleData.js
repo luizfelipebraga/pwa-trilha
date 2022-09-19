@@ -9,9 +9,9 @@ const accountLinks = new Map()
 
 const aboutLinks = new Map()
     .set('INSTITUCIONAL', '/about-us')
-    .set('Quem Somos', null)
-    .set('Nossa Historia', null)
-    .set('Trabalhe Conosco', null);
+    .set('Quem Somos', '/customer-service')
+    .set('Nossa Historia', '/customer-service')
+    .set('Trabalhe Conosco', '/customer-service');
 
 const helpLinks = new Map()
     .set('AJUDA ', null)

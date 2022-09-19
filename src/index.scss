@@ -5,12 +5,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-:global {
-  @import 'node_modules/slick-carousel/slick/slick';
-}
-
 :root {
-  @import 'node_modules/slick-carousel/slick/slick';
   /* Main Colors */
   --blue: #14214E;
   --red: #C70041;
@@ -74,26 +69,4 @@ h3 {
   font-size: 1.3rem;
   font-weight: 600 !important;
   line-height: 48px;
-}
-
-.pagebuilder-slider {
-  .slick-dots {
-    li {
-      button {
-        padding: 1rem;
-      }
-    }
-  }
-}
-
-.bg-brand-dark {
-  background-color: red !important;
-}
-
-.banner-content-4du > p > span {
-  font-weight: 700 !important;
-}
-
-#html-body [data-content-type="banner-styles"].banner-button-18m > button {
-  background: var(--red) !important;
 }

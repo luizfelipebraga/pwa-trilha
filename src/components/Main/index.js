@@ -8,6 +8,7 @@ import Footer from '@magento/venia-ui/lib/components/Footer/index';
 import Header from '@magento/venia-ui/lib/components/Header/index';
 import defaultClasses from '@magento/venia-ui/lib/components/Main/main.module.css';
 import BannerSlick from '../Banner/banner';
+import NewsLetter from '../NewsLetter';
 
 
 const Main = props => {
@@ -30,6 +31,7 @@ const Main = props => {
                 <div className={pageClass}>
                     <BannerSlick />
                     {children}
+                    <NewsLetter/>
                 </div>
             )}
             <Footer />
