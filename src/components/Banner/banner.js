@@ -7,6 +7,12 @@ import BannerContent from "./Content";
 import ArrowLeft from '../../assets/arrow-left.png';
 import ArrowRight from '../../assets/arrow-right.png';
 
+import truckImage1 from '../../assets/truck-banner.png';
+import truckImage2 from '../../assets/optimus-truck.png';
+import truckImage3 from '../../assets/volvo.png';
+import truckImage4 from '../../assets/caminhao4.png';
+
+
 function SamplePrevArrow(props) {
   const { className, onClick } = props;
   return (
@@ -113,16 +119,16 @@ export default class AppendDots extends Component {
       <div className={sliderClasses.root}>
         <SlickSlider {...settings}>
           <div>
-            <BannerContent title="garantia no" subtitle="mundo inteiro" />
+            <BannerContent title="garantia no" subtitle="mundo inteiro" truckImage={truckImage1} />
           </div>
           <div>
-            <BannerContent title="qualidade" subtitle="superior" />
+            <BannerContent title="qualidade" subtitle="superior" truckImage={truckImage2} />
           </div>
           <div>
-            <BannerContent title="entrega" subtitle="global" />
+            <BannerContent title="entrega" subtitle="global" truckImage={truckImage3} />
           </div>
           <div>
-            <BannerContent title="programas de" subtitle="manutencao" />
+            <BannerContent title="programas de" subtitle="manutencao"  truckImage={truckImage4}/>
           </div>
         </SlickSlider>
       </div>

@@ -1,8 +1,7 @@
 import React from 'react';
-import truckImage from '../../../assets/truck-banner.png';
 import styles from './styles.scss';
 
-const BannerContent = ({ title = '', subtitle = '' }) => {
+const BannerContent = ({ title = '', subtitle = '', truckImage = '' }) => {
   return (
     <div className={styles.container}>
       <div className={styles.box}>
@@ -12,7 +11,7 @@ const BannerContent = ({ title = '', subtitle = '' }) => {
         </div>
         <button className={styles.saibaMais}>SAIBA MAIS</button>
       </div>
-      <img src={truckImage} alt="truck" />
+      <img src={truckImage} alt="truck"/>
     </div>
   )
 }
