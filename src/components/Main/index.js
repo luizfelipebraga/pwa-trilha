@@ -24,14 +24,17 @@ const Main = props => {
         <main className={rootClass}>
             <Header />
             {window.location.pathname !== "/" ? (
-                <div className={pageClass}>
-                    {children}
-                </div>
+                <>
+                    <div className={pageClass}>
+                        {children}
+                    </div>
+                    <NewsLetter />
+                </>
             ) : (
                 <div className={pageClass}>
                     <BannerSlick />
                     {children}
-                    <NewsLetter/>
+                    <NewsLetter />
                 </div>
             )}
             <Footer />

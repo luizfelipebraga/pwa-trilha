@@ -5,5 +5,13 @@ module.exports = {
 
   '@magento/venia-ui/lib/components/MegaMenu/megaMenuItem.js': 'src/components/Header/megaMenuItem/index.js',
   '@magento/venia-ui/lib/components/MegaMenu/megaMenu.js': 'src/components/Header/megaMenu/index.js',
-  '@magento/venia-ui/lib/components/Main/main.js' : 'src/components/Main/index.js'
+  '@magento/venia-ui/lib/components/Main/main.js' : 'src/components/Main/index.js',
+  
+  //Category
+  '@magento/venia-ui/lib/RootComponents/Category/index.js':'src/components/Category/index.js',
+  '@magento/venia-ui/lib/RootComponents/Category/categoryContent.js': 'src/components/Category/categoryContent.js',
+  '@magento/venia-ui/lib/components/Gallery/item.js' : 'src/components/Gallery/index.js',
+
+  //breadcrumbs 
+  '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.js' : 'src/components/BreadCrumps'
 }
