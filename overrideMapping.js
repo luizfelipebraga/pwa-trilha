@@ -13,5 +13,8 @@ module.exports = {
   '@magento/venia-ui/lib/components/Gallery/item.js' : 'src/components/Gallery/index.js',
 
   //breadcrumbs 
-  '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.js' : 'src/components/BreadCrumps'
+  '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.js' : 'src/components/BreadCrumps',
+
+  //sidebar filter
+  '@magento/venia-ui/lib/components/FilterSidebar/filterSidebar.js' : 'src/components/FilterSideBar/index.js'
 }
