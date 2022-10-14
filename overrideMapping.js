@@ -16,5 +16,11 @@ module.exports = {
   '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.js' : 'src/components/BreadCrumps',
 
   //sidebar filter
-  '@magento/venia-ui/lib/components/FilterSidebar/filterSidebar.js' : 'src/components/FilterSideBar/index.js'
+  '@magento/venia-ui/lib/components/FilterSidebar/filterSidebar.js' : 'src/components/FilterSideBar/index.js',
+
+  //filterblock
+  '@magento/venia-ui/lib/components/FilterModal/filterBlock.js' : 'src/components/FilterModal/filterBlock.js',
+
+  //productFullDetail
+  '@magento/venia-ui/lib/components/ProductFullDetail/productFullDetail.js' : 'src/components/Product/ProductFullDetail/index.js'
 }

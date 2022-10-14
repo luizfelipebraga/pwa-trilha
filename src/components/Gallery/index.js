@@ -120,7 +120,7 @@ const GalleryItem = props => {
             >
                 <span>{name}</span>
             </Link>
-            <div data-cy="GalleryItem-price" className={styles.productPrice} style={{marginTop: '1rem'}}>
+            <div data-cy="GalleryItem-price" className={styles.productPrice}>
                 <Price
                     value={priceSource.value}
                     currencyCode={priceSource.currency}
