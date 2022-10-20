@@ -33,6 +33,8 @@ const ERROR_MESSAGE_TO_FIELD_MAPPING = {
     "The product that was requested doesn't exist.": 'quantity'
 };
 
+const loremIpsum = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+
 // Field level error messages for rendering.
 const ERROR_FIELD_TO_MESSAGE_MAPPING = {
     quantity: 'The requested quantity is not available.'
@@ -172,12 +174,13 @@ const ProductFullDetail = props => {
     const cartCallToActionText = !isOutOfStock ? (
         <FormattedMessage
             id="productFullDetail.addItemToCart"
-            defaultMessage="Add to Cart"
+            defaultMessage="Adicionar ao carrinho"
+            style={{ textTransform: 'capitalize', fontWeight: 'bold' }}
         />
     ) : (
         <FormattedMessage
             id="productFullDetail.itemOutOfStock"
-            defaultMessage="Out of Stock"
+            defaultMessage="Sem Estoque"
         />
     );
 
@@ -187,6 +190,7 @@ const ProductFullDetail = props => {
             disabled={isAddToCartDisabled}
             priority="high"
             type="submit"
+            style={{ backgroundColor: 'var(--cyan)', borderRadius: '5px', borderColor: 'var(--cyan)', textTransform: 'none', fontWeight: '700', fontSize: '1.4rem', padding: '1.5rem 1.7rem' }}
         >
             {cartCallToActionText}
         </Button>
@@ -233,14 +237,14 @@ const ProductFullDetail = props => {
                     <h1
                         aria-live="polite"
                         className={classes.productName}
-                        style={{fontWeight: '700', color: 'var(--blue)'}}
+                        style={{ fontWeight: '700', color: 'var(--blue)', fontSize: '2rem'}}
                         data-cy="ProductFullDetail-productName"
                     >
                         {productDetails.name}
                     </h1>
                     <p
                         data-cy="ProductFullDetail-productPrice"
-                        className={classes.productPrice}
+                        className={styles.productPrice}
                     >
                         <Price
                             currencyCode={productDetails.price.currency}
@@ -259,25 +263,32 @@ const ProductFullDetail = props => {
                 <section className={classes.quantity}>
                     <span
                         data-cy="ProductFullDetail-quantityTitle"
-                        className={classes.quantityTitle}
+                        className={styles.quantityTitle}
                     >
                         <FormattedMessage
                             id={'global.quantity'}
-                            defaultMessage={'Quantity'}
+                            defaultMessage={'Quantidade'}
                         />
                     </span>
-                    <QuantityStepper
-                        classes={{ root: classes.quantityRoot }}
-                        min={1}
-                        message={errors.get('quantity')}
-                    />
+                    <div className={styles.addProductBox}>
+                        <QuantityStepper
+                            classes={{ root: classes.quantityRoot }}
+                            min={1}
+                            message={errors.get('quantity')}
+                        />
+                        {cartActionContent}
+                    </div>
+
+                    <p className={styles.description}>
+                        {loremIpsum}
+                    </p>
+
                 </section>
-                <section className={classes.actions}>
-                    {cartActionContent}
+                {/* <section className={classes.actions}>
                     <Suspense fallback={null}>
                         <WishlistButton {...wishlistButtonProps} />
                     </Suspense>
-                </section>
+                </section> */}
                 <section className={classes.description}>
                     <span
                         data-cy="ProductFullDetail-descriptionTitle"

@@ -73,7 +73,7 @@ const Breadcrumbs = props => {
     const currentCategoryLink = currentProduct ? (
         <Link
             className={styles.link}
-            style={{color: 'var(--red)'}}
+            style={{color: 'var(--red)', margin: '1rem'}}
             to={resourceUrl(currentCategoryPath)}
             onClick={handleClick}
         >
