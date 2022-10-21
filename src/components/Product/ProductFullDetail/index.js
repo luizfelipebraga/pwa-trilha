@@ -237,7 +237,7 @@ const ProductFullDetail = props => {
                     <h1
                         aria-live="polite"
                         className={classes.productName}
-                        style={{ fontWeight: '700', color: 'var(--blue)', fontSize: '2rem'}}
+                        style={{ fontWeight: '700', color: 'var(--blue)', fontSize: '2rem' }}
                         data-cy="ProductFullDetail-productName"
                     >
                         {productDetails.name}
@@ -289,6 +289,7 @@ const ProductFullDetail = props => {
                         <WishlistButton {...wishlistButtonProps} />
                     </Suspense>
                 </section> */}
+
                 <section className={classes.description}>
                     <span
                         data-cy="ProductFullDetail-descriptionTitle"
@@ -296,10 +297,10 @@ const ProductFullDetail = props => {
                     >
                         <FormattedMessage
                             id={'productFullDetail.description'}
-                            defaultMessage={'Description'}
+                            defaultMessage={'Sobre o Produto'}
                         />
                     </span>
-                    <RichContent html={productDetails.description} />
+                    <RichContent html={loremIpsum} />
                 </section>
                 <section className={classes.details}>
                     <span
