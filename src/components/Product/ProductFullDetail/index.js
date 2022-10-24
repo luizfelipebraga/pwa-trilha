@@ -1,4 +1,4 @@
-import React, { useMemo, Fragment, Suspense } from 'react';
+import React, { useMemo, Fragment, Suspense, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
@@ -22,7 +22,11 @@ import defaultClasses from '@magento/venia-ui/lib/components/ProductFullDetail/p
 const WishlistButton = React.lazy(() => import('@magento/venia-ui/lib/components/Wishlist/AddToListButton/index'));
 const Options = React.lazy(() => import('@magento/venia-ui/lib/components/ProductOptions/index'));
 
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+
 import styles from './styles.scss';
+import { TabComponent } from '../../tabs';
 
 // Correlate a GQL error message to a field. GQL could return a longer error
 // string but it may contain contextual info such as product id. We can use
@@ -45,6 +49,21 @@ const ProductFullDetail = props => {
 
     const talonProps = useProductFullDetail({ product });
 
+    const handleDescription = () => {
+
+    }
+
+    const DescMap = ['Sobre o Produto', 'Informações Técnicas', 'Reviews']
+
+    const [counter, setCounter] = useState("1");
+
+    console.log(counter)
+
+    const handleClick = (event) => {
+        event.preventDefault();
+        setCounter(event.target.id);
+    };
+
     const {
         breadcrumbCategoryId,
         errorMessage,
@@ -62,6 +81,8 @@ const ProductFullDetail = props => {
     const { formatMessage } = useIntl();
 
     const classes = useStyle(defaultClasses, props.classes);
+
+    const [tabIndex, setTabIndex] = useState(0);
 
     const options = isProductConfigurable(product) ? (
         <Suspense fallback={<ProductOptionsShimmer />}>
@@ -290,31 +311,26 @@ const ProductFullDetail = props => {
                     </Suspense>
                 </section> */}
 
+                {/* <TabComponent/> */}
+
+
+
                 <section className={classes.description}>
-                    <span
-                        data-cy="ProductFullDetail-descriptionTitle"
-                        className={classes.descriptionTitle}
-                    >
-                        <FormattedMessage
-                            id={'productFullDetail.description'}
-                            defaultMessage={'Sobre o Produto'}
-                        />
-                    </span>
-                    <RichContent html={loremIpsum} />
-                </section>
-                <section className={classes.details}>
-                    <span
-                        data-cy="ProductFullDetail-detailsTitle"
-                        className={classes.detailsTitle}
-                    >
-                        <FormattedMessage
-                            id={'productFullDetail.details'}
-                            defaultMessage={'Details'}
-                        />
-                    </span>
-                    <CustomAttributes
-                        customAttributes={customAttributesDetails.list}
-                    />
+
+                    {DescMap.map((value, index) => {
+                        return <button
+                            key={index}
+                            id={index}
+                            className={counter === index.toString() ? styles.active : styles.footerButtons}
+                            onClick={handleClick}>{value}</button>
+                    })}
+
+                    {counter === '0' ?
+                        (<span className={styles.optionsProduct}><RichContent style={{marginTop: '2rem'}} html={loremIpsum} /></span>)
+                        :
+                        (<span className={styles.optionsProduct}><CustomAttributes style={{marginTop: '2rem'}} customAttributes={customAttributesDetails.list} /></span>)
+                    }
+
                 </section>
                 {pageBuilderAttributes}
             </Form>

@@ -22,5 +22,8 @@ module.exports = {
   '@magento/venia-ui/lib/components/FilterModal/filterBlock.js' : 'src/components/FilterModal/filterBlock.js',
 
   //productFullDetail
-  '@magento/venia-ui/lib/components/ProductFullDetail/productFullDetail.js' : 'src/components/Product/ProductFullDetail/index.js'
+  '@magento/venia-ui/lib/components/ProductFullDetail/productFullDetail.js' : 'src/components/Product/ProductFullDetail/index.js',
+
+  //payment Methods
+  '@magento/venia-ui/lib/components/CheckoutPage/PaymentInformation/paymentMethods.js' : 'src/components/PaymentsMethods/payment.js'
 }

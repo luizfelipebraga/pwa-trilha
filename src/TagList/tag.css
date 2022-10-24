@@ -1,0 +1,13 @@
+/* src/TagList.tag.css */
+
+.root {
+  border: solid 1px #2680eb;
+  padding: 3px 9px;
+  margin: 5px;
+  border-radius: 6px;
+}
+
+.content {
+  color: #2680eb;
+  font-size: 0.875rem;
+}
