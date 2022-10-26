@@ -28,5 +28,8 @@ module.exports = {
   '@magento/venia-ui/lib/components/CheckoutPage/PaymentInformation/paymentMethods.js' : 'src/components/PaymentsMethods/payment.js',
 
   // checkout 
-  '@magento/venia-ui/lib/components/CheckoutPage/checkoutPage.js' : 'src/components/PaymentsMethods/payment.js'
+  '@magento/venia-ui/lib/components/CheckoutPage/checkoutPage.js' : 'src/components/PaymentsMethods/payment.js',
+
+  //lib //
+  '@magento/pagebuilder/lib/ContentTypes/Slider/slider.module.css' : 'src/components/Banner/slider.module.css'
 }
