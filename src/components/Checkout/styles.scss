@@ -1,0 +1,11 @@
+.headerProducts {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+
+  span {
+    &:first-child {
+      flex: 1;
+    }
+  }
+}

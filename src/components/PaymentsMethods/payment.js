@@ -44,12 +44,10 @@ const PaymentMethods = props => {
             //     return;
             // }
 
-            console.log('aaa')
-            console.log('payments', payments['name'])
             console.log('code', code)
             const id = `paymentMethod--${code}`;
             const isSelected = currentSelectedPaymentMethod === code;
-            const PaymentMethodComponent = 'CreditCard';
+            const PaymentMethodComponent = code;
             const renderedComponent = isSelected ? (
                 <PaymentMethodComponent
                     onPaymentSuccess={onPaymentSuccess}

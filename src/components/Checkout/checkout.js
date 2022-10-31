@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { shape, string } from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AlertCircle as AlertCircleIcon } from 'react-feather';
@@ -31,6 +31,9 @@ import GoogleReCaptcha from '@magento/venia-ui/lib/components/GoogleReCaptcha/in
 
 import defaultClasses from '@magento/venia-ui/lib/components/CheckoutPage/checkoutPage.module.css';
 import ScrollAnchor from '@magento/venia-ui/lib/components/ScrollAnchor/scrollAnchor';
+
+import styles from './styles.scss';
+import { ProductCheckoutCard } from './ProductCheckoutCard';
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
@@ -80,6 +83,31 @@ const CheckoutPage = props => {
         toggleSignInContent
     } = talonProps;
 
+    console.log('orderDetailsData', orderDetailsData)
+    console.log('cartItems', cartItems)
+    console.log('shippingInformationRef', shippingInformationRef)
+
+    const [productItems, setProductItems] = useState(cartItems);
+    console.log('productItems', productItems)
+
+    const renderProducts = productItems?.map((p, index) => {
+        return (
+            <ProductCheckoutCard
+                key={index}
+                img={p.product.thumbnail.url}
+                productName={p.product.name}
+                price={p.prices.price.value}
+                qtd={p.quantity}
+            />
+        )
+    })
+
+    const headerArray = ['Produto', 'Preco Unidade', 'Qtd', 'Subtotal']
+
+    const renderHeaderProducts = headerArray.map((h, index) => {
+        return <span key={index}>{h}</span>
+    })
+
     const [, { addToast }] = useToasts();
 
     useEffect(() => {
@@ -88,10 +116,10 @@ const CheckoutPage = props => {
                 error && error.message
                     ? error.message
                     : formatMessage({
-                          id: 'checkoutPage.errorSubmit',
-                          defaultMessage:
-                              'Oops! An error occurred while submitting. Please try again.'
-                      });
+                        id: 'checkoutPage.errorSubmit',
+                        defaultMessage:
+                            'Oops! An error occurred while submitting. Please try again.'
+                    });
             addToast({
                 type: 'error',
                 icon: errorIcon,
@@ -115,13 +143,13 @@ const CheckoutPage = props => {
 
     const heading = isGuestCheckout
         ? formatMessage({
-              id: 'checkoutPage.guestCheckout',
-              defaultMessage: 'Guest Checkout'
-          })
+            id: 'checkoutPage.guestCheckout',
+            defaultMessage: 'Guest Checkout'
+        })
         : formatMessage({
-              id: 'checkoutPage.checkout',
-              defaultMessage: 'Checkout'
-          });
+            id: 'checkoutPage.checkout',
+            defaultMessage: 'Checkout'
+        });
 
     if (orderNumber && orderDetailsData) {
         return (
@@ -202,7 +230,7 @@ const CheckoutPage = props => {
         const isPaymentAvailable = !!availablePaymentMethods.find(({ code }) => code === 'checkmo' || paymentMethods.includes(code));
 
         const teste = !!availablePaymentMethods.find(({ code }) => code === 'checkmo')
-        
+
         console.log('teste', teste)
         console.log('availablePaymentMethods', availablePaymentMethods)
 
@@ -241,6 +269,8 @@ const CheckoutPage = props => {
                     <PriceAdjustments setPageIsUpdating={setIsUpdating} />
                 </div>
             ) : null;
+
+        console.log('handleReviewOrder', handleReviewOrder)
 
         const reviewOrderButton =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
@@ -320,7 +350,7 @@ const CheckoutPage = props => {
         } else if (customer.default_shipping) {
             headerText = formatMessage({
                 id: 'checkoutPage.reviewAndPlaceOrder',
-                defaultMessage: 'Review and Place Order'
+                defaultMessage: 'Carrinho'
             });
         } else {
             headerText = formatMessage(
@@ -430,6 +460,8 @@ const CheckoutPage = props => {
             </StoreTitle>
             {checkoutContent}
             {addressBookElement}
+            {renderHeaderProducts}
+            {renderProducts}
             {signInElement}
         </div>
     );

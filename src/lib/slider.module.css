@@ -1,4 +1,4 @@
-.root {
+/* .root {
   display: block;
   position: relative;
   touch-action: pan-y;
@@ -224,4 +224,4 @@
 
 .root :global .slick-current {
   z-index: 1;
-}
+} */
