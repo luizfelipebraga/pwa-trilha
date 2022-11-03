@@ -21,7 +21,7 @@ const Main = props => {
     useScrollLock(isMasked);
 
     return (
-        <main className={rootClass}>
+        <main>
             <Header />
             {window.location.pathname !== "/" ? (
                 <>

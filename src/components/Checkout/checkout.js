@@ -37,6 +37,13 @@ import { ProductCheckoutCard } from './ProductCheckoutCard';
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
+const CHECKOUT_STEPINGS = {
+    CART: 1,
+    REVIEW: 2,
+    PAYMENT: 3,
+    DONE: 4
+};
+
 const CheckoutPage = props => {
     const { classes: propClasses } = props;
     const { formatMessage } = useIntl();
@@ -140,15 +147,16 @@ const CheckoutPage = props => {
     const isMobile = windowSize.innerWidth <= 960;
 
     let checkoutContent;
+    let orderSum;
 
     const heading = isGuestCheckout
         ? formatMessage({
             id: 'checkoutPage.guestCheckout',
-            defaultMessage: 'Guest Checkout'
+            defaultMessage: 'Carrinho visitante'
         })
         : formatMessage({
             id: 'checkoutPage.checkout',
-            defaultMessage: 'Checkout'
+            defaultMessage: 'Carrinho'
         });
 
     if (orderNumber && orderDetailsData) {
@@ -275,7 +283,10 @@ const CheckoutPage = props => {
         const reviewOrderButton =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
                 <Button
-                    onClick={handleReviewOrder}
+                    onClick={() => {
+                        handleReviewOrder
+                        setCheckoutSteps(CHECKOUT_STEPINGS.REVIEW);
+                    }}
                     priority="high"
                     className={classes.review_order_button}
                     data-cy="CheckoutPage-reviewOrderButton"
@@ -339,6 +350,8 @@ const CheckoutPage = props => {
                 <OrderSummary isUpdating={isUpdating} />
             </div>
         ) : null;
+
+        orderSum = orderSummary;
 
         let headerText;
 
@@ -450,19 +463,73 @@ const CheckoutPage = props => {
         />
     ) : null;
 
+    const [checkoutSteps, setCheckoutSteps] = useState(CHECKOUT_STEPINGS.CART);
+    console.log('CHECKOUT_STEPINGS.CART', CHECKOUT_STEPINGS.CART)
+    console.log('checkoutSteps', checkoutSteps);
+    console.log(checkoutSteps === CHECKOUT_STEPINGS.CART)
+
+    function renderCartPage() {
+        return (
+            <React.Fragment>
+                <div className={styles.header}>
+                    {renderHeaderProducts}
+                </div>
+                {renderProducts}
+                <div className={classes.price_adjustments_container}>
+                    <PriceAdjustments setPageIsUpdating={setIsUpdating} />
+                </div>
+            </React.Fragment>
+        )
+    }
+
+    // checkoutSteps === CHECKOUT_STEPINGS.REVIEW ? (
+    //     <>
+
+    //     </>
+    // ) : null;
+
+    // checkoutSteps === CHECKOUT_STEPINGS.PAYMENT ? (
+    //     <>
+
+    //     </>
+    // ) : null;
+
     return (
-        <div className={classes.root} data-cy="CheckoutPage-root">
+        <div className={styles.root} data-cy="CheckoutPage-root">
             <StoreTitle>
                 {formatMessage({
                     id: 'checkoutPage.titleCheckout',
-                    defaultMessage: 'Checkout'
+                    defaultMessage: 'Carrinho'
                 })}
             </StoreTitle>
-            {checkoutContent}
-            {addressBookElement}
-            {renderHeaderProducts}
-            {renderProducts}
-            {signInElement}
+            {checkoutSteps === CHECKOUT_STEPINGS.CART ? (
+                <React.Fragment>
+                    <div className={styles.cartContainer}>
+                        <h1 className={styles.checkoutTitle}>{heading}</h1>
+
+                        <div className={styles.flexContainer}>
+                            <aside>
+                                {orderSum}
+                            </aside>
+
+                            <main>
+                                <div className={styles.header}>
+                                    {renderHeaderProducts}
+                                </div>
+                                {renderProducts}
+                                <div className={classes.price_adjustments_container}>
+                                    <PriceAdjustments setPageIsUpdating={setIsUpdating} />
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </React.Fragment>
+            ) : null}
+
+             {signInElement} 
+            {/* {addressBookElement} */}
+            {/* {renderCartPage} */}
+            {/* {/* {checkoutContent} */}
         </div>
     );
 };
