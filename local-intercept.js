@@ -16,7 +16,15 @@
  * with many customizations, this function would tap those targets and add
  * or modify functionality from its dependencies.
  */
+ const { Targetables } = require("@magento/pwa-buildpack");
 
-function localIntercept() {}
+function localIntercept(targets) {
+  const targetables = Targetables.using(targets);
+
+  targets.of("venia").myListContent.tap((api) => {
+    api.addContent("Hello");
+    api.addContent("World");
+  });
+}
 
 module.exports = localIntercept;

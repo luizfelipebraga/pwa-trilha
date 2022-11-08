@@ -1,0 +1,55 @@
+.root {
+  max-width: 68.75rem;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
+
+
+.header {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  justify-content: space-between;
+
+  span {
+    color: #707070;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 3rem;
+
+    &:first-child {
+      margin-right: 7.5rem;
+    }
+
+    &:nth-child(2) {
+      margin-left: 4rem;
+    }
+  }
+}
+
+.cartContainer {
+  width: 100%;
+}
+
+.checkoutTitle {
+  font-weight: 700;
+  font-size: 1.875rem;
+  text-transform: uppercase;
+}
+
+.flexContainer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+main {
+  flex: 1;
+}
+
+aside {
+  margin-left: 5rem;
+}

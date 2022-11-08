@@ -10,7 +10,7 @@ import Shimmer from '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.sh
 import defaultClasses from 'node_modules/@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.module.css';
 import styles from './styles.scss';
 
-const DELIMITER = '>';
+const DELIMITER = '>>';
 /**
  * Breadcrumbs! Generates a sorted display of category links.
  *
@@ -40,7 +40,8 @@ const Breadcrumbs = props => {
                 <Fragment key={text}>
                     <span className={classes.divider}>{DELIMITER}</span>
                     <Link
-                        className={classes.link}
+                        style={{margin: '0 1rem'}}
+                        className={styles.link}
                         to={resourceUrl(path)}
                         onClick={handleClick}
                     >
@@ -71,14 +72,15 @@ const Breadcrumbs = props => {
     // a category page so it should be regular text.
     const currentCategoryLink = currentProduct ? (
         <Link
-            className={classes.link}
+            className={styles.link}
+            style={{color: 'var(--red)', margin: '1rem'}}
             to={resourceUrl(currentCategoryPath)}
             onClick={handleClick}
         >
             {currentCategory}
         </Link>
     ) : (
-        <span className={classes.currentCategory}>{currentCategory}</span>
+        <span style={{color: 'var(--red)', marginLeft: '1rem'}} className={styles.link}>{currentCategory}</span>
     );
 
     const currentProductNode = currentProduct ? (
@@ -90,7 +92,7 @@ const Breadcrumbs = props => {
 
     return (
         <div className={classes.root} aria-live="polite" aria-busy="false">
-            <Link className={classes.link} to="/">
+            <Link style={{marginRight: '1rem'}} className={styles.link} to="/">
                 <FormattedMessage id={'global.home'} defaultMessage={'Home'} />
             </Link>
             {links}

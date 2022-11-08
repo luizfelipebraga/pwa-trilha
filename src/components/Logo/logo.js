@@ -29,6 +29,7 @@ const Logo = props => {
             src={logo}
             title={title}
             width={width}
+            alt={"logo"}
         />
     );
 };

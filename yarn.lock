@@ -2042,10 +2042,10 @@
   resolved "https://registry.yarnpkg.com/@magento/upward-security-headers/-/upward-security-headers-1.0.9.tgz#51c85292bf867f737c87b7db4181c2eff371f942"
   integrity sha512-PNf0EcUfyUS0OpR5JbX48HPs97Nyt6bIUab6RxILitZp9MzBt03LUEZHFsy+FGA1++zfdEmwa/arsCeXAYBFfA==
 
-"@magento/venia-ui@~9.5.0":
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/@magento/venia-ui/-/venia-ui-9.5.0.tgz#4a51490f907eb5104b85eaad0658ed341ad2a64e"
-  integrity sha512-zRoJytcPd9jUEncxoisLcU/7BSNk9vVxbjwaM/9b0DGX+Zs/pRo8XQ31kBb9GD+UIIiCKLXMoM8qNRHUyOxeug==
+"@magento/venia-ui@^9.6.0":
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/@magento/venia-ui/-/venia-ui-9.6.0.tgz#3f483505623e796cdad2ce2b6bc75887c5432d08"
+  integrity sha512-nJvgIcIU8deFU1D17AKRKeWAFxIB7+6xpxXaQqR8p0cqgSXVDCyyNfMSl8xMAWy/qK9FcgyLw+RYU+rzayS+iQ==
   dependencies:
     informed "~3.29.0"
     jarallax "~1.11.1"
@@ -12612,10 +12612,10 @@ react-syntax-highlighter@^13.5.3:
     prismjs "^1.21.0"
     refractor "^3.1.0"
 
-react-tabs@~3.1.0:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-3.1.2.tgz#9047ad7d8a53d357a67c14ad4c4a64cc16660fa8"
-  integrity sha512-OKS1l7QzSNcn+L2uFsxyGFHdXp9YsPGf/YOURWcImp7xLN36n0Wz+/j9HwlwGtlXCZexwshScR5BrcFbw/3P9Q==
+react-tabs@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-5.1.0.tgz#5ef8fad015c71c23b0fff65bd9b3bd419219c27b"
+  integrity sha512-jsPVEPuhG7JljTo8Q4ujz4UKRpG90nHlDClAdvV5KrLxCHU+MT/kg7dmhq8fDv8+frciDtaYeFFlTVRLm4N5AQ==
   dependencies:
     clsx "^1.1.0"
     prop-types "^15.5.0"
@@ -12649,13 +12649,12 @@ react-transition-group@^4.4.2:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@~17.0.1:
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
-  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+react@^18.2.0:
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
+  integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 read-cache@^1.0.0:
   version "1.0.0"

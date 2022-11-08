@@ -13,5 +13,23 @@ module.exports = {
   '@magento/venia-ui/lib/components/Gallery/item.js' : 'src/components/Gallery/index.js',
 
   //breadcrumbs 
-  '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.js' : 'src/components/BreadCrumps'
+  '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.js' : 'src/components/BreadCrumps',
+
+  //sidebar filter
+  '@magento/venia-ui/lib/components/FilterSidebar/filterSidebar.js' : 'src/components/FilterSideBar/index.js',
+
+  //filterblock
+  '@magento/venia-ui/lib/components/FilterModal/filterBlock.js' : 'src/components/FilterModal/filterBlock.js',
+
+  //productFullDetail
+  '@magento/venia-ui/lib/components/ProductFullDetail/productFullDetail.js' : 'src/components/Product/ProductFullDetail/index.js',
+
+  //payment Methods
+  '@magento/venia-ui/lib/components/CheckoutPage/PaymentInformation/paymentMethods.js' : 'src/components/PaymentsMethods/payment.js',
+
+  // checkout 
+  '@magento/venia-ui/lib/components/CheckoutPage/checkoutPage.js' : 'src/components/Checkout/checkout.js',
+
+  //lib //
+  // '@magento/pagebuilder/lib/ContentTypes/Slider/slider.module.css' : 'src/lib/slider.module.css'
 }

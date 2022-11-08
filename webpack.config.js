@@ -7,6 +7,7 @@ const { promisify } = require('util');
 const OverrideMappingPlugin = require('override-mapping-webpack-plugin-pwa-studio');
 const overrideMapping = require('./overrideMapping');
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
+// import 'react-tabs/style/react-tabs.scss';
 
 const {
     getMediaURL,
@@ -54,6 +55,9 @@ module.exports = async env => {
             'redux-actions',
             'redux-thunk'
         ],
+        node: {
+            fs: 'empty'
+        },
         special: {
             'react-feather': {
                 esModules: true
@@ -154,9 +158,6 @@ module.exports = async env => {
             'sass-loader'
         ]
     });
-
-    {/* config.plugins.push(new OverrideMappingPlugin(Object.assign(overrideMapping))) */}
-
 
 
     /*

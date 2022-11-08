@@ -1,0 +1,50 @@
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.addProductBox {
+  display: flex;
+  align-items: center;
+}
+
+.quantityTitle {
+  font-size: 1.3rem;
+  color: #707070;
+}
+
+.productPrice {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.description {
+  margin-top: 2rem;
+  color: #707070;
+}
+
+.optionsProduct {
+  margin-top: 2rem;
+}
+
+.footerButtons {
+  background-color: #eaeaea;
+  padding: 1.5rem;
+  color: #000;
+  border-radius: 5px;
+  font-weight: 700;
+
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.active {
+  background: var(--blue);
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}

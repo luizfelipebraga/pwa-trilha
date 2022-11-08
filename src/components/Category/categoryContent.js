@@ -21,6 +21,7 @@ import SortedByContainer, {
   SortedByContainerShimmer
 } from '@magento/venia-ui/lib/components/SortedByContainer/index';
 import defaultClasses from '@magento/venia-ui/lib/RootComponents/Category/category.module.css';
+import styles from './styles.scss';
 import NoProductsFound from '@magento/venia-ui/lib/RootComponents/Category/NoProductsFound/index';
 
 const FilterModal = React.lazy(() => import('@magento/venia-ui/lib/components/FilterModal/index'));
@@ -162,7 +163,7 @@ const CategoryContent = props => {
 
         <h1 aria-live="polite" className={classes.title}>
           <div
-            className={classes.categoryTitle}
+            className={styles.CategoryTitle}
             data-cy="CategoryContent-categoryTitle"
           >
             {categoryTitle}
@@ -177,13 +178,13 @@ const CategoryContent = props => {
           </div>
           <div className={classes.categoryContent}>
             <div className={classes.heading}>
-              <div
+              {/* <div
                 data-cy="CategoryContent-categoryInfo"
                 className={classes.categoryInfo}
               >
                 {categoryResultsHeading}
-              </div>
-              <div className={classes.headerButtons}>
+              </div> */}
+              <div className={classes.headerButtons} style={{padding: '1rem 0', borderTop: '#d7d7d7 2px solid', borderBottom: '#d7d7d7 2px solid'}}>
                 {maybeFilterButtons}
                 {maybeSortButton}
               </div>
