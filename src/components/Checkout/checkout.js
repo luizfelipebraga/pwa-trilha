@@ -90,12 +90,9 @@ const CheckoutPage = props => {
         toggleSignInContent
     } = talonProps;
 
-    console.log('orderDetailsData', orderDetailsData)
     console.log('cartItems', cartItems)
-    console.log('shippingInformationRef', shippingInformationRef)
 
-    const [productItems, setProductItems] = useState(cartItems);
-    console.log('productItems', productItems)
+    const [productItems] = useState(cartItems);
 
     const renderProducts = productItems?.map((p, index) => {
         return (
@@ -236,11 +233,6 @@ const CheckoutPage = props => {
         // If we have an implementation, or if this is a "zero" checkout,
         // we can allow checkout to proceed.
         const isPaymentAvailable = !!availablePaymentMethods.find(({ code }) => code === 'checkmo' || paymentMethods.includes(code));
-
-        const teste = !!availablePaymentMethods.find(({ code }) => code === 'checkmo')
-
-        console.log('teste', teste)
-        console.log('availablePaymentMethods', availablePaymentMethods)
 
         if (!isPaymentAvailable) {
             formErrors.push(
@@ -464,45 +456,10 @@ const CheckoutPage = props => {
     ) : null;
 
     const [checkoutSteps, setCheckoutSteps] = useState(CHECKOUT_STEPINGS.CART);
-    console.log('CHECKOUT_STEPINGS.CART', CHECKOUT_STEPINGS.CART)
-    console.log('checkoutSteps', checkoutSteps);
-    console.log(checkoutSteps === CHECKOUT_STEPINGS.CART)
 
-    function renderCartPage() {
-        return (
-            <React.Fragment>
-                <div className={styles.header}>
-                    {renderHeaderProducts}
-                </div>
-                {renderProducts}
-                <div className={classes.price_adjustments_container}>
-                    <PriceAdjustments setPageIsUpdating={setIsUpdating} />
-                </div>
-            </React.Fragment>
-        )
-    }
-
-    // checkoutSteps === CHECKOUT_STEPINGS.REVIEW ? (
-    //     <>
-
-    //     </>
-    // ) : null;
-
-    // checkoutSteps === CHECKOUT_STEPINGS.PAYMENT ? (
-    //     <>
-
-    //     </>
-    // ) : null;
-
-    return (
-        <div className={styles.root} data-cy="CheckoutPage-root">
-            <StoreTitle>
-                {formatMessage({
-                    id: 'checkoutPage.titleCheckout',
-                    defaultMessage: 'Carrinho'
-                })}
-            </StoreTitle>
-            {checkoutSteps === CHECKOUT_STEPINGS.CART ? (
+    const renderCheckoutPage = () => {
+        if (checkoutSteps === CHECKOUT_STEPINGS.CART) {
+            return (
                 <React.Fragment>
                     <div className={styles.cartContainer}>
                         <h1 className={styles.checkoutTitle}>{heading}</h1>
@@ -520,16 +477,61 @@ const CheckoutPage = props => {
                                 <div className={classes.price_adjustments_container}>
                                     <PriceAdjustments setPageIsUpdating={setIsUpdating} />
                                 </div>
+
+                                <Link to={{
+                                    pathname: '/checkout-address',
+                                    state: productItems
+                                }} >Learn More</Link>
                             </main>
                         </div>
                     </div>
                 </React.Fragment>
-            ) : null}
+            )
+        }
 
-             {signInElement} 
-            {/* {addressBookElement} */}
-            {/* {renderCartPage} */}
-            {/* {/* {checkoutContent} */}
+        else if (checkoutSteps === CHECKOUT_STEPINGS.REVIEW) {
+            heading = formatMessage({
+                id: 'checkoutPage.guestCheckout',
+                defaultMessage: 'Endereco de Entrega'
+            })
+
+            return (
+                <React.Fragment>
+                    <h1 className={styles.checkoutTitle}>{heading}</h1>
+                    {checkoutContent}
+                    {/* {signInElement} */}
+                    {/* {addressBookElement} */}
+                </React.Fragment>
+            )
+        }
+
+        else {
+            heading = formatMessage({
+                id: 'checkoutPage.guestCheckout',
+                defaultMessage: 'Pagamento'
+            })
+            return (
+                <React.Fragment>
+                    <h1 className={styles.checkoutTitle}>{heading}</h1>
+                    {signInElement}
+                    {addressBookElement}
+                    {checkoutContent}
+                </React.Fragment>
+            )
+        }
+
+    }
+
+    return (
+        <div className={styles.root} data-cy="CheckoutPage-root">
+            <StoreTitle>
+                {formatMessage({
+                    id: 'checkoutPage.titleCheckout',
+                    defaultMessage: 'Carrinho'
+                })}
+            </StoreTitle>
+
+            {renderCheckoutPage()}
         </div>
     );
 };

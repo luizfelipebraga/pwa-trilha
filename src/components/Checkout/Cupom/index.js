@@ -1,15 +1,10 @@
 import React, { Suspense } from 'react';
-import { useIntl } from 'react-intl';
 import { func } from 'prop-types';
 
-import { useStyle } from '../../../classify';
-import LoadingIndicator from '../../LoadingIndicator';
-import { Accordion, Section } from '../../Accordion';
-import CouponCode from '../../CartPage/PriceAdjustments/CouponCode';
-import GiftCardSection from '../../CartPage/PriceAdjustments/giftCardSection';
-import GiftOptionsSection from '../../CartPage/PriceAdjustments/giftOptionsSection';
+import { useStyle } from '@magento/venia-ui/lib/classify';
+import CouponCode from '@magento/venia-ui/lib/components/CartPage/PriceAdjustments/CouponCode/index';
 
-import defaultClasses from './priceAdjustments.module.css';
+import defaultClasses from '@magento/venia-ui/lib/components/CheckoutPage/PriceAdjustments/priceAdjustments.module.css';
 
 /**
  * PriceAdjustments component for the Checkout page.
@@ -20,26 +15,12 @@ const PriceAdjustments = props => {
     const classes = useStyle(defaultClasses, props.classes);
 
     const { setPageIsUpdating } = props;
-    const { formatMessage } = useIntl();
 
     return (
         <div className={classes.root}>
-            <Accordion canOpenMultiple={true}>
-                <Section
-                    data-cy="PriceAdjustments-couponCodeSection"
-                    id={'coupon_code'}
-                    title={formatMessage({
-                        id: 'checkoutPage.couponCode',
-                        defaultMessage: 'Coloque seu Cupom'
-                    })}
-                >
-                    <Suspense fallback={<LoadingIndicator />}>
-                        <CouponCode setIsCartUpdating={setPageIsUpdating} />
-                    </Suspense>
-                </Section>
-                <GiftCardSection setIsCartUpdating={setPageIsUpdating} />
-                <GiftOptionsSection />
-            </Accordion>
+            <div data-cy="PriceAdjustments-couponCodeSection">
+                <CouponCode setIsCartUpdating={setPageIsUpdating} />
+            </div>
         </div>
     );
 };

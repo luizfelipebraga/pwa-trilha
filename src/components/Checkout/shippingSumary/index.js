@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Price from '@magento/venia-ui/lib/components/Price';
 
-import { useStyle } from '../../../classify';
+import { useStyle } from '@magento/venia-ui/lib/classify';
 /**
  * A component that renders the shipping summary line item after address and
  * method are selected

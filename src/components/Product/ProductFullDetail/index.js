@@ -19,14 +19,12 @@ import { ProductOptionsShimmer } from '@magento/venia-ui/lib/components/ProductO
 import CustomAttributes from '@magento/venia-ui/lib/components/ProductFullDetail/CustomAttributes/index.js';
 import defaultClasses from '@magento/venia-ui/lib/components/ProductFullDetail/productFullDetail.module.css';
 
-const WishlistButton = React.lazy(() => import('@magento/venia-ui/lib/components/Wishlist/AddToListButton/index'));
 const Options = React.lazy(() => import('@magento/venia-ui/lib/components/ProductOptions/index'));
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import styles from './styles.scss';
-import { TabComponent } from '../../tabs';
 
 // Correlate a GQL error message to a field. GQL could return a longer error
 // string but it may contain contextual info such as product id. We can use
@@ -49,15 +47,9 @@ const ProductFullDetail = props => {
 
     const talonProps = useProductFullDetail({ product });
 
-    const handleDescription = () => {
-
-    }
-
     const DescMap = ['Sobre o Produto', 'Informações Técnicas', 'Reviews']
 
     const [counter, setCounter] = useState("1");
-
-    console.log(counter)
 
     const handleClick = (event) => {
         event.preventDefault();
@@ -81,8 +73,6 @@ const ProductFullDetail = props => {
     const { formatMessage } = useIntl();
 
     const classes = useStyle(defaultClasses, props.classes);
-
-    const [tabIndex, setTabIndex] = useState(0);
 
     const options = isProductConfigurable(product) ? (
         <Suspense fallback={<ProductOptionsShimmer />}>
