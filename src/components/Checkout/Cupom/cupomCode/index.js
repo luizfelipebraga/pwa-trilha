@@ -135,6 +135,7 @@ const CouponCode = props => {
                         id: 'cartPage.couponCode',
                         defaultMessage: 'Aplique seu Cupom de desconto'
                     })}
+                    style={{ color: 'var(--blue)' }}
                     className={styles.inputCupom}
                 >
                     <TextInput

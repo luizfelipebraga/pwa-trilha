@@ -339,7 +339,7 @@ const CheckoutPage = props => {
                         : '')
                 }
             >
-                <OrderSummary isUpdating={isUpdating} />
+                <OrderSummary productData={productItems} isUpdating={isUpdating} />
             </div>
         ) : null;
 
@@ -446,14 +446,6 @@ const CheckoutPage = props => {
         />
     ) : null;
 
-    const signInElement = isGuestCheckout ? (
-        <GuestSignIn
-            key={guestSignInUsername}
-            isActive={activeContent === 'signIn'}
-            toggleActiveContent={toggleSignInContent}
-            initialValues={{ email: guestSignInUsername }}
-        />
-    ) : null;
 
     const [checkoutSteps, setCheckoutSteps] = useState(CHECKOUT_STEPINGS.CART);
 
@@ -477,49 +469,12 @@ const CheckoutPage = props => {
                                 <div className={classes.price_adjustments_container}>
                                     <PriceAdjustments setPageIsUpdating={setIsUpdating} />
                                 </div>
-
-                                <Link to={{
-                                    pathname: '/checkout-address',
-                                    state: productItems
-                                }} >Learn More</Link>
                             </main>
                         </div>
                     </div>
                 </React.Fragment>
             )
         }
-
-        else if (checkoutSteps === CHECKOUT_STEPINGS.REVIEW) {
-            heading = formatMessage({
-                id: 'checkoutPage.guestCheckout',
-                defaultMessage: 'Endereco de Entrega'
-            })
-
-            return (
-                <React.Fragment>
-                    <h1 className={styles.checkoutTitle}>{heading}</h1>
-                    {checkoutContent}
-                    {/* {signInElement} */}
-                    {/* {addressBookElement} */}
-                </React.Fragment>
-            )
-        }
-
-        else {
-            heading = formatMessage({
-                id: 'checkoutPage.guestCheckout',
-                defaultMessage: 'Pagamento'
-            })
-            return (
-                <React.Fragment>
-                    <h1 className={styles.checkoutTitle}>{heading}</h1>
-                    {signInElement}
-                    {addressBookElement}
-                    {checkoutContent}
-                </React.Fragment>
-            )
-        }
-
     }
 
     return (
@@ -532,6 +487,7 @@ const CheckoutPage = props => {
             </StoreTitle>
 
             {renderCheckoutPage()}
+            {/* {addressBookElement} */}
         </div>
     );
 };

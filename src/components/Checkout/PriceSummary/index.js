@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Price from '@magento/venia-ui/lib/components/Price';
 import { usePriceSummary } from '@magento/peregrine/lib/talons/CartPage/PriceSummary/usePriceSummary';
@@ -10,7 +10,9 @@ import GiftCardSummary from '@magento/venia-ui/lib/components/CartPage/PriceSumm
 import GiftOptionsSummary from '@magento/venia-ui/lib/components/CartPage/PriceSummary/giftOptionsSummary';
 import ShippingSummary from '@magento/venia-ui/lib/components/CartPage/PriceSummary/shippingSummary';
 import TaxSummary from '@magento/venia-ui/lib/components/CartPage/PriceSummary/taxSummary';
-
+import styles from './styles.scss';
+import { Link } from 'react-router-dom';
+import Radio from '@magento/venia-ui/lib/components/RadioGroup/radio.js';
 /**
  * A child component of the CartPage component.
  * This component fetches and renders cart data, such as subtotal, discounts applied,
@@ -27,7 +29,7 @@ import TaxSummary from '@magento/venia-ui/lib/components/CartPage/PriceSummary/t
  * import PriceSummary from "@magento/venia-ui/lib/components/CartPage/PriceSummary";
  */
 const PriceSummary = props => {
-    const { isUpdating } = props;
+    const { productData, isUpdating } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = usePriceSummary();
 
@@ -68,21 +70,28 @@ const PriceSummary = props => {
         shipping
     } = flatData;
 
+    const [cepRadio, setCepRadio] = useState(shipping[0].selected_shipping_method.amount.value);
+    const [currencyCode] = useState(shipping[0].selected_shipping_method.amount.currency);
+
+
+    console.log('shipping', shipping)
+    console.log('flatData', flatData)
+
     const isPriceUpdating = isUpdating || isLoading;
     const priceClass = isPriceUpdating ? classes.priceUpdating : classes.price;
     const totalPriceClass = isPriceUpdating
         ? classes.priceUpdating
-        : classes.totalPrice;
+        : styles.totalPrice;
 
     const totalPriceLabel = isCheckout
         ? formatMessage({
-              id: 'priceSummary.total',
-              defaultMessage: 'Total'
-          })
+            id: 'priceSummary.total',
+            defaultMessage: 'Total'
+        })
         : formatMessage({
-              id: 'priceSummary.estimatedTotal',
-              defaultMessage: 'Estimated Total'
-          });
+            id: 'priceSummary.estimatedTotal',
+            defaultMessage: 'Estimated Total'
+        });
 
     const proceedToCheckoutButton = !isCheckout ? (
         <div className={classes.checkoutButton_container}>
@@ -101,9 +110,31 @@ const PriceSummary = props => {
     ) : null;
 
     return (
-        <div className={classes.root} data-cy="PriceSummary-root">
+        <div className={classes.root} data-cy="PriceSummary-root" style={{ backgroundColor: '#eaeaea' }}>
             <div>
                 <ul>
+                    <li>
+                        <h2>Resumo</h2>
+                    </li>
+
+                    <li style={{ marginBottom: '1rem' }}>
+                        <p className={styles.CepTitle}>Calcule com seu CEP</p>
+                        <div className={styles.CepField}>
+                            <input className={styles.inputCep} placeholder='08431-450' />
+                            <button className={styles.buttonCep}>Calcular</button>
+                        </div>
+                    </li>
+
+                    <li className={styles.radioBox}>
+                        <input type="radio" id="shipping" name="shipping" value={shipping[0].selected_shipping_method.amount.value} onClick={() => setCepRadio(shipping[0].selected_shipping_method.amount.value)}/>
+                        <label for="shipping">Sedex - <strong>{`R$ ${shipping[0].selected_shipping_method.amount.value},00`}</strong></label>
+                    </li>
+
+                    <li className={styles.radioBox}>
+                        <input type="radio" id="shipping" name="shipping" value={0} onClick={() => setCepRadio(0)}/>
+                        <label for="shipping">PAC - <strong>{`R$ 0,00`}</strong></label>
+                    </li>
+
                     <li className={classes.lineItems}>
                         <span
                             data-cy="PriceSummary-lineItemLabel"
@@ -166,7 +197,8 @@ const PriceSummary = props => {
                                 lineItemLabel: classes.lineItemLabel,
                                 price: priceClass
                             }}
-                            data={shipping}
+                            data={cepRadio}
+                            currencyCode={currencyCode}
                             isCheckout={isCheckout}
                         />
                     </li>
@@ -186,6 +218,17 @@ const PriceSummary = props => {
                                 currencyCode={total.currency}
                             />
                         </span>
+                    </li>
+
+                    <li style={{ marginTop: '1rem' }}>
+                        <Link to={{
+                            pathname: '/checkout-address',
+                            state: productData
+                        }}>
+                            <button className={styles.checkoutButton}>
+                                Ir para o Checkout
+                            </button>
+                        </Link>
                     </li>
                 </ul>
             </div>

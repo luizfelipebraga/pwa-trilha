@@ -12,16 +12,17 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
  */
 const ShippingSummary = props => {
     const classes = useStyle({}, props.classes);
-    const { data, isCheckout } = props;
+    const { data, currencyCode, isCheckout } = props;
     const { formatMessage } = useIntl();
 
     // Don't render estimated shipping until an address has been provided and
     // a method has been selected.
-    if (!data.length || !data[0].selected_shipping_method) {
-        return null;
-    }
-
-    const shipping = data[0].selected_shipping_method.amount;
+    // if (!data.length || !data) {
+    //     return null;
+    // }
+    console.log('SHIPPING:', data)
+    console.log('currencyCode:', currencyCode)
+    const shipping = data;
 
     const shippingLabel = isCheckout
         ? formatMessage({
@@ -34,11 +35,11 @@ const ShippingSummary = props => {
           });
 
     // For a value of "0", display "FREE".
-    const price = shipping.value ? (
-        <Price value={shipping.value} currencyCode={shipping.currency} />
+    const price = shipping ? (
+        <Price value={shipping} currencyCode={currencyCode} />
     ) : (
         <span>
-            <FormattedMessage id={'global.free'} defaultMessage={'FREE'} />
+            <FormattedMessage id={'global.free'} defaultMessage={'R$ 0,00'} />
         </span>
     );
 
