@@ -10,3 +10,34 @@
   font-size: 1.875rem;
   text-transform: uppercase;
 }
+
+.boxAddressShipping  {
+  display: flex;
+  gap: 3rem;
+}
+
+.boxMethodShipping {
+  margin-top: 2rem;
+
+  ul {
+    padding: 2rem 0;
+  }
+}
+
+.radioBox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .4rem 0;
+  margin-bottom: 1rem solid #b4b4b4;
+}
+
+.checkoutButton {
+  max-width: 20rem;
+  background: var(--cyan);
+  color: #fff;
+  font-weight: 700;
+  padding: 1rem 1.4rem;
+  border-radius: 5px;
+  font-size: 1.125rem;
+}

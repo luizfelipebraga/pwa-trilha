@@ -12,7 +12,6 @@ import ShippingSummary from '@magento/venia-ui/lib/components/CartPage/PriceSumm
 import TaxSummary from '@magento/venia-ui/lib/components/CartPage/PriceSummary/taxSummary';
 import styles from './styles.scss';
 import { Link } from 'react-router-dom';
-import Radio from '@magento/venia-ui/lib/components/RadioGroup/radio.js';
 /**
  * A child component of the CartPage component.
  * This component fetches and renders cart data, such as subtotal, discounts applied,
@@ -70,9 +69,15 @@ const PriceSummary = props => {
         shipping
     } = flatData;
 
+    console.log('total', total)
     const [cepRadio, setCepRadio] = useState(shipping[0].selected_shipping_method.amount.value);
-    const [currencyCode] = useState(shipping[0].selected_shipping_method.amount.currency);
+    let currencyCode = shipping[0].selected_shipping_method.amount.currency;
+    let sedex = shipping[0].selected_shipping_method.amount.value;
+    const totalValue = { ...total }
 
+    if (cepRadio === 0) {
+        totalValue.value = totalValue.value - sedex
+    }
 
     console.log('shipping', shipping)
     console.log('flatData', flatData)
@@ -126,12 +131,12 @@ const PriceSummary = props => {
                     </li>
 
                     <li className={styles.radioBox}>
-                        <input type="radio" id="shipping" name="shipping" value={shipping[0].selected_shipping_method.amount.value} onClick={() => setCepRadio(shipping[0].selected_shipping_method.amount.value)}/>
-                        <label for="shipping">Sedex - <strong>{`R$ ${shipping[0].selected_shipping_method.amount.value},00`}</strong></label>
+                        <input type="radio" id="shipping" checked={cepRadio === sedex} name="shipping" value={sedex} onClick={() => setCepRadio(sedex)} />
+                        <label for="shipping">Sedex - <strong>{`R$ ${sedex},00`}</strong></label>
                     </li>
 
                     <li className={styles.radioBox}>
-                        <input type="radio" id="shipping" name="shipping" value={0} onClick={() => setCepRadio(0)}/>
+                        <input type="radio" id="shipping" name="shipping" value={0} onClick={() => setCepRadio(0)} />
                         <label for="shipping">PAC - <strong>{`R$ 0,00`}</strong></label>
                     </li>
 
@@ -214,7 +219,7 @@ const PriceSummary = props => {
                             className={totalPriceClass}
                         >
                             <Price
-                                value={total.value}
+                                value={totalValue.value}
                                 currencyCode={total.currency}
                             />
                         </span>
