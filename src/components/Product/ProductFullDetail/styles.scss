@@ -14,9 +14,14 @@
 }
 
 .productPrice {
+  font-size: 2.1rem;
   color: var(--red);
   font-weight: 700;
-  font-size: 2rem;
+}
+
+.installmentPrice {
+  font-size: 1.4375rem;
+  color: #707070;
 }
 
 .description {
@@ -30,7 +35,7 @@
 
 .footerButtons {
   background-color: #eaeaea;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   color: #000;
   border-radius: 5px;
   font-weight: 700;
@@ -42,7 +47,7 @@
 .active {
   background: var(--blue);
   color: #fff;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   border-radius: 5px;
   font-weight: 700;
   font-size: 1.5rem;

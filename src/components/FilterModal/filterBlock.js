@@ -86,7 +86,7 @@ const FilterBlock = props => {
             className={classes.root}
             aria-label={itemAriaLabel}
             data-cy="FilterBlock-root"
-            style={{borderLeftWidth: '2px', borderRightWidth: '2px', padding: '0 1rem'}}
+            style={{borderLeftWidth: '2px', borderRightWidth: '2px', padding: '0 1rem', borderBottom: '2px solid #d7d7d7'}}
         >
             <button
                 className={classes.trigger}

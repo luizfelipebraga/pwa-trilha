@@ -1,12 +1,17 @@
 .productName {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   color: #707070;
   font-weight: 400;
   line-height: 2rem;
+  max-width: 16rem;
+  text-align: center;
 }
 
 .productPrice {
   font-size: 1.6rem;
   color: var(--red);
   font-weight: 700;
+
+  max-width: 16rem;
+  text-align: center;
 }

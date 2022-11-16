@@ -2,7 +2,7 @@ import React, { useMemo, Fragment, Suspense, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import { Form } from 'informed';
-import { Info } from 'react-feather';
+import { Info, Star } from 'react-feather';
 
 import Price from '@magento/venia-ui/lib/components/Price';
 import { useProductFullDetail } from '@magento/peregrine/lib/talons/ProductFullDetail/useProductFullDetail';
@@ -25,6 +25,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import styles from './styles.scss';
+import Rating from '@magento/venia-ui/lib/components/Rating';
 
 // Correlate a GQL error message to a field. GQL could return a longer error
 // string but it may contain contextual info such as product id. We can use
@@ -35,7 +36,7 @@ const ERROR_MESSAGE_TO_FIELD_MAPPING = {
     "The product that was requested doesn't exist.": 'quantity'
 };
 
-const loremIpsum = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+const loremIpsum = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages';
 
 // Field level error messages for rendering.
 const ERROR_FIELD_TO_MESSAGE_MAPPING = {
@@ -70,7 +71,29 @@ const ProductFullDetail = props => {
         wishlistButtonProps
     } = talonProps;
 
+    const installmentPrice = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(productDetails.price.value / 6);
+
     const { formatMessage } = useIntl();
+
+    const ratings = (
+        <div
+            data-cy="ratingProduct"
+            style={{
+                display: 'flex', flexDirection: 'row',
+                backgroundColor: 'transparent',
+                marginBottom: '1rem'
+            }}>
+            {/* <span className={classes.ratingValue}>
+                {((rating * 5) / 100).toFixed(1)}
+            </span> */}
+            <Star fill='#b89401' stroke='transparent' size={25} />
+            <Star fill='#b89401' stroke='transparent' size={25} />
+            <Star fill='#b89401' stroke='transparent' size={25} />
+            <Star fill='#b89401' stroke='transparent' size={25} />
+            <Star fill='#d7d7d7' stroke='transparent' size={25} />
+        </div>
+    )
+
 
     const classes = useStyle(defaultClasses, props.classes);
 
@@ -253,6 +276,7 @@ const ProductFullDetail = props => {
                     >
                         {productDetails.name}
                     </h1>
+                    <section>{ratings}</section>
                     <p
                         data-cy="ProductFullDetail-productPrice"
                         className={styles.productPrice}
@@ -262,7 +286,7 @@ const ProductFullDetail = props => {
                             value={productDetails.price.value}
                         />
                     </p>
-                    {shortDescription}
+                    <p className={styles.installmentPrice}>ou em 6x de <strong>{installmentPrice}</strong> sem juros</p>
                 </section>
                 <FormError
                     classes={{
@@ -316,9 +340,11 @@ const ProductFullDetail = props => {
                     })}
 
                     {counter === '0' ?
-                        (<span className={styles.optionsProduct}><RichContent style={{marginTop: '2rem'}} html={loremIpsum} /></span>)
+                        (<span className={styles.optionsProduct}><RichContent style={{ marginTop: '2rem' }} html={loremIpsum} /></span>)
                         :
-                        (<span className={styles.optionsProduct}><CustomAttributes style={{marginTop: '2rem'}} customAttributes={customAttributesDetails.list} /></span>)
+                        counter === '1' ?
+                            (<span className={styles.optionsProduct}><CustomAttributes style={{ marginTop: '2rem' }} customAttributes={customAttributesDetails.list} /></span>)
+                            : (<p style={{ fontSize: '1.4rem' }}>Nenhuma Review do Produto</p>)
                     }
 
                 </section>

@@ -80,10 +80,12 @@ const GalleryItem = props => {
         price_range.maximum_price.regular_price;
 
     // Hide the Rating component until it is updated with the new look and feel (PWA-2512).
-    const ratingAverage = null;
+    // const ratingAverage = null;
     // const ratingAverage = rating_summary ? (
     //     <Rating rating={rating_summary} />
     // ) : null;
+
+    const ratingAverage = <Rating rating={4} />;
 
     return (
         <div
@@ -98,7 +100,9 @@ const GalleryItem = props => {
                 to={productLink}
                 className={classes.images}
             >
-                <Image
+                {ratingAverage}
+
+                <img
                     alt={name}
                     classes={{
                         image: classes.image,
@@ -106,11 +110,10 @@ const GalleryItem = props => {
                         notLoaded: classes.imageNotLoaded,
                         root: classes.imageContainer
                     }}
-                    height={IMAGE_HEIGHT}
-                    resource={smallImageURL}
-                    widths={IMAGE_WIDTHS}
+                    height={250}
+                    src={smallImageURL}
+                    width={250}
                 />
-                {ratingAverage}
             </Link>
             <Link
                 onClick={handleLinkClick}

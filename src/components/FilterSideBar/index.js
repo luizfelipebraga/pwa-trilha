@@ -114,7 +114,7 @@ const FilterSidebar = props => {
                     <h2
                         data-cy="FilterSidebar-headerTitle"
                         className={classes.headerTitle}
-                        style={{color: 'var(--blue', fontSize: '1.8rem'}}
+                        style={{color: 'var(--blue', fontSize: '1.8rem', fontWeight: '500'}}
                     >
                         <FormattedMessage
                             id={'filterModal.headerTitle'}
