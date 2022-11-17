@@ -22,6 +22,7 @@ const Main = props => {
 
     return (
         <main>
+            {/* {window.location.pathname === '/checkout-address' || window.location.pathname === '/checkout-payment' && null} */}
             <Header />
             {window.location.pathname !== "/" ? (
                 <>

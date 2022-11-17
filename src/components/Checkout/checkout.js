@@ -487,7 +487,7 @@ const CheckoutPage = props => {
             </StoreTitle>
 
             {renderCheckoutPage()}
-            {/* {addressBookElement} */}
+            {addressBookElement}
         </div>
     );
 };

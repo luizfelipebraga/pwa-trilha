@@ -31,6 +31,7 @@ const PriceSummary = props => {
     const { productData, isUpdating } = props;
     const classes = useStyle(defaultClasses, props.classes);
     const talonProps = usePriceSummary();
+    const orderData = [...productData];
 
     const {
         handleProceedToCheckout,
@@ -78,6 +79,8 @@ const PriceSummary = props => {
     if (cepRadio === 0) {
         totalValue.value = totalValue.value - sedex
     }
+    orderData.total = {...totalValue}
+
 
     console.log('shipping', shipping)
     console.log('flatData', flatData)
@@ -228,7 +231,7 @@ const PriceSummary = props => {
                     <li style={{ marginTop: '1rem' }}>
                         <Link to={{
                             pathname: '/checkout-address',
-                            state: productData
+                            state: orderData
                         }}>
                             <button className={styles.checkoutButton}>
                                 Ir para o Checkout

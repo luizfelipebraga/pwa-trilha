@@ -14,6 +14,17 @@
 .boxAddressShipping  {
   display: flex;
   gap: 3rem;
+
+  >div {
+    flex: 1;
+  }
+
+  aside {
+    background-color: #f4f4f4;
+    padding: 2rem;
+    height: auto;
+    align-self: flex-start;
+  }
 }
 
 .boxMethodShipping {

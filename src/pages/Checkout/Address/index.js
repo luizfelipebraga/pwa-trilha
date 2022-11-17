@@ -12,7 +12,7 @@ export function CheckoutAddressPage() {
   const { state } = useLocation();
   const { formatMessage } = useIntl();
 
-  const orderData = [...state];
+  const orderData = {...state};
 
   console.log('CheckoutAddressPage', state);
   console.log('orderData', orderData);
@@ -46,7 +46,6 @@ export function CheckoutAddressPage() {
   // let sedex = shipping[0].selected_shipping_method.amount.value;
   const headingCard = orderData.length > 0 ? <span>Produtos</span> : <span>Produto</span>;
 
-
   const [cepRadio, setCepRadio] = useState(1);
 
   const addressBookElement = <AddressBook
@@ -73,7 +72,7 @@ export function CheckoutAddressPage() {
 
         <aside>
           <h2>Resumo do Pedido</h2>
-          <span>{orderData.length} - {headingCard}</span>
+          <span>{orderData.length}  {headingCard}</span>
         </aside>
       </div>
       {addressBookElement}
