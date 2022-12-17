@@ -12,10 +12,10 @@ export function CheckoutAddressPage() {
   const { state } = useLocation();
   const { formatMessage } = useIntl();
 
-  const orderData = {...state};
+  const orderData = state;
 
-  console.log('CheckoutAddressPage', state);
   console.log('orderData', orderData);
+  console.log('orderData:', orderData[0]);
 
   const heading = formatMessage({
     id: 'checkoutPage.clientCheckoutAddress',
@@ -44,9 +44,22 @@ export function CheckoutAddressPage() {
 
   // let currencyCode = shipping[0].selected_shipping_method.amount.currency;
   // let sedex = shipping[0].selected_shipping_method.amount.value;
-  const headingCard = orderData.length > 0 ? <span>Produtos</span> : <span>Produto</span>;
 
-  const [cepRadio, setCepRadio] = useState(1);
+  const verifyProductAmount = () => {
+    let index = 0;
+    for (let value of orderData) {
+      if (value.quantity != 1) {
+        index = (index + value.quantity) - 1;
+      }
+    }
+    return index;
+  }
+
+  const titleCard = orderData.length > 1 ? <span>Produtos</span> : orderData[0].quantity > 1 ? <span>Produtos</span> : <span>Produto</span>;
+  const orderResumeQnt = verifyProductAmount();
+
+  const shippingFormatted = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(orderData.shipping);
+  const [cepRadio, setCepRadio] = useState(orderData.shipping);
 
   const addressBookElement = <AddressBook
     activeContent={activeContent}
@@ -72,7 +85,7 @@ export function CheckoutAddressPage() {
 
         <aside>
           <h2>Resumo do Pedido</h2>
-          <span>{orderData.length}  {headingCard}</span>
+          <span>{orderResumeQnt + orderData.length}  {titleCard}</span>
         </aside>
       </div>
       {addressBookElement}
@@ -82,8 +95,8 @@ export function CheckoutAddressPage() {
 
         <ul>
           <li className={styles.radioBox}>
-            <input type="radio" id="shipping" checked={cepRadio === 1} name="shipping" value={1} onClick={() => setCepRadio(1)} />
-            <label for="shipping">Sedex - <strong>{`R$ 15,00`}</strong></label>
+            <input type="radio" id="shipping" checked={cepRadio === orderData.shipping} name="shipping" value={orderData.shipping} onClick={() => setCepRadio(orderData.shipping)} />
+            <label for="shipping">Sedex - <strong>{shippingFormatted}</strong></label>
           </li>
 
           <li className={styles.radioBox}>
@@ -97,7 +110,7 @@ export function CheckoutAddressPage() {
           state: orderData
         }}>
           <button className={styles.checkoutButton}>
-            Ir para o Checkout
+            Ir para o Pagamento
           </button>
         </Link>
       </div>

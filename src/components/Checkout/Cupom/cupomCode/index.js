@@ -10,9 +10,9 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import Button from '@magento/venia-ui/lib/components/Button/index';
 import { Form } from 'informed';
 import Field from '@magento/venia-ui/lib/components/Field/index.js';
+import TextInput from '@magento/venia-ui/lib/components/TextInput/index.js';
 import Icon from '@magento/venia-ui/lib/components/Icon/index';
 import LinkButton from '@magento/venia-ui/lib/components/LinkButton/index.js';
-import TextInput from '@magento/venia-ui/lib/components/TextInput/index.js';
 import styles from './styles.scss';
 
 import defaultClasses from '@magento/venia-ui/lib/components/CartPage/PriceAdjustments/CouponCode/couponCode.module.css';

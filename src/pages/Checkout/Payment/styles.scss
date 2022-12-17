@@ -3,4 +3,51 @@
   width: 100%;
   margin: 0 auto;
   margin-top: 4rem;
+
+  ul {
+    margin: 2rem 0;
+
+    li {
+      margin-top: .5rem;
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}
+
+.formPayment {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  max-width: 20rem;
+}
+
+.wrapperCardBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  img {
+    border: 1px solid #d7d7d7;
+    border-radius: 4px;
+    padding: .4rem;
+  }
+}
+
+input[type=text], input[type=numeric], input[type=date], input[type=number]{
+  border: 1px solid #d7d7d7;
+  background-color: #ffffff;
+  border-radius: 4px;
+  width: 100%;
+  padding: .6rem;
+}
+
+.buttonBoleto {
+  padding: 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 5px;
+  background-color: var(--cyan);
 }

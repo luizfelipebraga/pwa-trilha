@@ -90,27 +90,7 @@ const CheckoutPage = props => {
         toggleSignInContent
     } = talonProps;
 
-    console.log('cartItems', cartItems)
 
-    const [productItems] = useState(cartItems);
-
-    const renderProducts = productItems?.map((p, index) => {
-        return (
-            <ProductCheckoutCard
-                key={index}
-                img={p.product.thumbnail.url}
-                productName={p.product.name}
-                price={p.prices.price.value}
-                qtd={p.quantity}
-            />
-        )
-    })
-
-    const headerArray = ['Produto', 'Preco Unidade', 'Qtd', 'Subtotal']
-
-    const renderHeaderProducts = headerArray.map((h, index) => {
-        return <span key={index}>{h}</span>
-    })
 
     const [, { addToast }] = useToasts();
 
@@ -137,6 +117,24 @@ const CheckoutPage = props => {
             }
         }
     }, [addToast, error, formatMessage, hasError]);
+
+    const renderProducts = cartItems?.map((p, index) => {
+        return (
+            <ProductCheckoutCard
+                key={index}
+                img={p.product.thumbnail.url}
+                productName={p.product.name}
+                price={p.prices.price.value}
+                qtd={p.quantity}
+            />
+        )
+    })
+
+    const headerArray = ['Produto', 'Preco Unidade', 'Qtd', 'Subtotal']
+
+    const renderHeaderProducts = headerArray.map((h, index) => {
+        return <span key={index}>{h}</span>
+    })
 
     const classes = useStyle(defaultClasses, propClasses);
 
@@ -245,24 +243,6 @@ const CheckoutPage = props => {
             );
         }
 
-        const paymentInformationSection =
-            checkoutStep >= CHECKOUT_STEP.PAYMENT ? (
-                <PaymentInformation
-                    onSave={setPaymentInformationDone}
-                    checkoutError={error}
-                    resetShouldSubmit={resetReviewOrderButtonClicked}
-                    setCheckoutStep={setCheckoutStep}
-                    shouldSubmit={reviewOrderButtonClicked}
-                />
-            ) : (
-                <h3 className={classes.payment_information_heading}>
-                    <FormattedMessage
-                        id={'checkoutPage.paymentInformationStep'}
-                        defaultMessage={'3. Payment Information'}
-                    />
-                </h3>
-            );
-
         const priceAdjustmentsSection =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
                 <div className={classes.price_adjustments_container}>
@@ -277,7 +257,6 @@ const CheckoutPage = props => {
                 <Button
                     onClick={() => {
                         handleReviewOrder
-                        setCheckoutSteps(CHECKOUT_STEPINGS.REVIEW);
                     }}
                     priority="high"
                     className={classes.review_order_button}
@@ -339,7 +318,7 @@ const CheckoutPage = props => {
                         : '')
                 }
             >
-                <OrderSummary productData={productItems} isUpdating={isUpdating} />
+                <OrderSummary productData={cartItems} isUpdating={isUpdating} />
             </div>
         ) : null;
 
@@ -425,9 +404,6 @@ const CheckoutPage = props => {
                         {shippingMethodSection}
                     </ScrollAnchor>
                 </div>
-                <div className={classes.payment_information_container}>
-                    {paymentInformationSection}
-                </div>
                 {priceAdjustmentsSection}
                 {reviewOrderButton}
                 {itemsReview}
@@ -447,34 +423,28 @@ const CheckoutPage = props => {
     ) : null;
 
 
-    const [checkoutSteps, setCheckoutSteps] = useState(CHECKOUT_STEPINGS.CART);
-
     const renderCheckoutPage = () => {
-        if (checkoutSteps === CHECKOUT_STEPINGS.CART) {
-            return (
-                <React.Fragment>
-                    <div className={styles.cartContainer}>
-                        <h1 className={styles.checkoutTitle}>{heading}</h1>
+        return (
+            <div className={styles.cartContainer}>
+                <h1 className={styles.checkoutTitle}>{heading}</h1>
 
-                        <div className={styles.flexContainer}>
-                            <aside>
-                                {orderSum}
-                            </aside>
+                <div className={styles.flexContainer}>
+                    <aside>
+                        {orderSum}
+                    </aside>
 
-                            <main>
-                                <div className={styles.header}>
-                                    {renderHeaderProducts}
-                                </div>
-                                {renderProducts}
-                                <div className={classes.price_adjustments_container}>
-                                    <PriceAdjustments setPageIsUpdating={setIsUpdating} />
-                                </div>
-                            </main>
+                    <main>
+                        <div className={styles.header}>
+                            {renderHeaderProducts}
                         </div>
-                    </div>
-                </React.Fragment>
-            )
-        }
+                        {!renderProducts ? 'Loading' : renderProducts}
+                        <div className={classes.price_adjustments_container}>
+                            <PriceAdjustments setPageIsUpdating={setIsUpdating} />
+                        </div>
+                    </main>
+                </div>
+            </div>
+        )
     }
 
     return (
@@ -487,7 +457,7 @@ const CheckoutPage = props => {
             </StoreTitle>
 
             {renderCheckoutPage()}
-            {addressBookElement}
+            {/* {addressBookElement} */}
         </div>
     );
 };

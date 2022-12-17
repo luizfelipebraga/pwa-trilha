@@ -44,4 +44,7 @@ module.exports = {
   '@magento/venia-ui/lib/components/CartPage/PriceAdjustments/CouponCode/couponCode.js': 'src/components/Checkout/Cupom/cupomCode/index.js',
 
   // '@magento/venia-ui/lib/components/Routes/routes.js': 'src/routes.js',
+
+  '@magento/venia-ui/lib/components/CheckoutPage/AddressBook/addressBook.js' : 'src/components/Checkout/AddressBook/index.js',
+  '@magento/venia-ui/lib/components/CheckoutPage/AddressBook/addressCard.js' : 'src/components/Checkout/AddressBook/Card/index.js',
 }

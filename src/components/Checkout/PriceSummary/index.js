@@ -70,7 +70,6 @@ const PriceSummary = props => {
         shipping
     } = flatData;
 
-    console.log('total', total)
     const [cepRadio, setCepRadio] = useState(shipping[0].selected_shipping_method.amount.value);
     let currencyCode = shipping[0].selected_shipping_method.amount.currency;
     let sedex = shipping[0].selected_shipping_method.amount.value;
@@ -80,10 +79,7 @@ const PriceSummary = props => {
         totalValue.value = totalValue.value - sedex
     }
     orderData.total = {...totalValue}
-
-
-    console.log('shipping', shipping)
-    console.log('flatData', flatData)
+    orderData.shipping = sedex;
 
     const isPriceUpdating = isUpdating || isLoading;
     const priceClass = isPriceUpdating ? classes.priceUpdating : classes.price;
