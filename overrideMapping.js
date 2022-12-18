@@ -45,6 +45,8 @@ module.exports = {
 
   // '@magento/venia-ui/lib/components/Routes/routes.js': 'src/routes.js',
 
-  '@magento/venia-ui/lib/components/CheckoutPage/AddressBook/addressBook.js' : 'src/components/Checkout/AddressBook/index.js',
-  '@magento/venia-ui/lib/components/CheckoutPage/AddressBook/addressCard.js' : 'src/components/Checkout/AddressBook/Card/index.js',
+  '@magento/venia-ui/lib/components/CheckoutPage/AddressBook/addressBook.js': 'src/components/Checkout/AddressBook/index.js',
+  '@magento/venia-ui/lib/components/CheckoutPage/AddressBook/addressCard.js': 'src/components/Checkout/AddressBook/Card/index.js',
+
+  '@magento/venia-ui/lib/components/CheckoutPage/ShippingInformation/shippingInformation.js': 'src/components/Checkout/ShippingAddress/index.js',
 }

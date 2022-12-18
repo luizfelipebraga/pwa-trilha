@@ -4,6 +4,8 @@ import { Link, Route } from 'react-router-dom';
 
 import TruckLogo from 'node_modules/@magento/venia-ui/lib/components/Logo/logo.svg';
 
+import WhiteCheck from './images/check.svg';
+
 import Logo from '@magento/venia-ui/lib/components/Logo/index';
 import AccountTrigger from '@magento/venia-ui/lib/components/Header/accountTrigger';
 import CartTrigger from '@magento/venia-ui/lib/components/Header/cartTrigger';
@@ -15,7 +17,7 @@ import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from '@magento/venia-ui/lib/components/Header/header.module.css';
-import styledClasses from './style.scss';
+import styles from './style.scss';
 import StoreSwitcher from '@magento/venia-ui/lib/components/Header/storeSwitcher';
 import CurrencySwitcher from '@magento/venia-ui/lib/components/Header/currencySwitcher';
 import MegaMenu from '@magento/venia-ui/lib/components/MegaMenu/index';
@@ -58,6 +60,109 @@ const Header = props => {
     const { formatMessage } = useIntl();
     const title = formatMessage({ id: 'logo.title', defaultMessage: 'Venia' });
 
+    const isAddressOrPaymentCheckout = () => {
+        if (window.location.pathname === '/checkout-address') {
+            return (
+                <div className={styles.container}>
+                    <header className={styles.root} data-cy="Header-root">
+                        <Link
+                            aria-label={title}
+                            to={resourceUrl('/')}
+                            className={classes.logoContainer}
+                            data-cy="Header-logoContainer"
+                        >
+                            <Logo src={TruckLogo} classes={{ logo: styles.logo }} />
+                        </Link>
+
+                        <div className={styles.containerRadio}>
+                            <div className={styles.boxRadio}>
+                                <input type="radio" id="entrega" name="entrega" checked={true} styles={styles.radioChecked} />
+                                <label htmlFor="entrega" id='entrega'>Entrega</label>
+                            </div>
+
+                            <div className={styles.line} />
+
+                            <div className={styles.boxRadioNotChecked}>
+                                <input type="radio" id="pagamento" name="pagamento" checked={false} />
+                                <label htmlFor="pagamento" id='pagamento'>Pagamento</label>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+            )
+        }
+
+        else if (window.location.pathname === '/checkout-payment') {
+            return (
+                <div className={styles.container}>
+                    <header className={styles.root} data-cy="Header-root">
+                        <Link
+                            aria-label={title}
+                            to={resourceUrl('/')}
+                            className={classes.logoContainer}
+                            data-cy="Header-logoContainer"
+                        >
+                            <Logo src={TruckLogo} classes={{ logo: styles.logo }} />
+                        </Link>
+
+                        <div className={styles.containerRadio}>
+                            <div className={styles.boxRadio}>
+                                <div className={styles.checkedAddress}>
+                                    <img src={WhiteCheck} alt="white check icon"/>
+                                </div>
+                                <label htmlFor="entrega" id='entrega'>Entrega</label>
+                            </div>
+
+                            <div className={styles.line} />
+
+                            <div className={styles.boxRadio}>
+                                <input type="radio" id="pagamento" name="pagamento" checked={true} />
+                                <label htmlFor="pagamento" id='entrega'>Pagamento</label>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+            )
+        }
+
+        else {
+            return (
+                <header className={rootClass} data-cy="Header-root">
+                    <div className={classes.toolbar}>
+                        <div className={classes.primaryActions}>
+                            <NavTrigger />
+                        </div>
+                        <OnlineIndicator
+                            hasBeenOffline={hasBeenOffline}
+                            isOnline={isOnline}
+                        />
+                        <Link
+                            aria-label={title}
+                            to={resourceUrl('/')}
+                            className={classes.logoContainer}
+                            data-cy="Header-logoContainer"
+                        >
+                            <Logo src={TruckLogo} classes={{ logo: styles.logo }} />
+                        </Link>
+                        <MegaMenu />
+                        <div className={classes.secondaryActions}>
+                            <SearchTrigger
+                                onClick={handleSearchTriggerClick}
+                                ref={searchTriggerRef}
+                            />
+                            <AccountTrigger />
+                            <CartTrigger />
+                        </div>
+                    </div>
+                    {searchBar}
+                    <PageLoadingIndicator absolute />
+                </header>
+            )
+        }
+    }
+
+
+
     return (
         <Fragment>
             <div className={classes.switchersContainer}>
@@ -66,7 +171,8 @@ const Header = props => {
                     <CurrencySwitcher />
                 </div>
             </div>
-            <header className={rootClass} data-cy="Header-root">
+            {isAddressOrPaymentCheckout()}
+            {/* <header className={rootClass} data-cy="Header-root">
                 <div className={classes.toolbar}>
                     <div className={classes.primaryActions}>
                         <NavTrigger />
@@ -95,7 +201,7 @@ const Header = props => {
                 </div>
                 {searchBar}
                 <PageLoadingIndicator absolute />
-            </header>
+            </header> */}
         </Fragment>
     );
 };

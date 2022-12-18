@@ -40,7 +40,21 @@
   align-items: center;
   gap: 1rem;
   padding: .4rem 0;
-  margin-bottom: 1rem solid #b4b4b4;
+  margin-bottom: 1rem;
+
+  input[type="radio"] {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  input[type="radio"]:checked {
+    accent-color: var(--blue);
+  }
+
+  label {
+    font-size: 1rem;
+    color: #525252;
+  }
 }
 
 .checkoutButton {

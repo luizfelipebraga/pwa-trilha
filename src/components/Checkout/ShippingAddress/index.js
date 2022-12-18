@@ -12,7 +12,9 @@ import Card from '@magento/venia-ui/lib/components/CheckoutPage/ShippingInformat
 import defaultClasses from '@magento/venia-ui/lib/components/CheckoutPage/ShippingInformation/shippingInformation.module.css';
 import LinkButton from '@magento/venia-ui/lib/components/LinkButton/index';
 
-const EditModal = React.lazy(() => import('./editModal'));
+import styles from './styles.scss';
+
+const EditModal = React.lazy(() => import('@magento/venia-ui/lib/components/CheckoutPage/ShippingInformation/editModal'));
 
 const ShippingInformation = props => {
     const {
@@ -41,8 +43,8 @@ const ShippingInformation = props => {
     const rootClassName = !doneEditing
         ? classes.root_editMode
         : hasUpdate
-        ? classes.root_updated
-        : classes.root;
+            ? classes.root_updated
+            : classes.root;
 
     if (isLoading) {
         return (
@@ -63,27 +65,29 @@ const ShippingInformation = props => {
 
     const shippingInformation = doneEditing ? (
         <Fragment>
-            <div className={classes.cardHeader}>
-                <LinkButton
-                    onClick={handleEditShipping}
-                    className={classes.editButton}
-                    data-cy="ShippingInformation-editButton"
-                >
-                    <Icon
-                        size={16}
-                        src={EditIcon}
-                        classes={{ icon: classes.editIcon }}
-                    />
-                    <span className={classes.editText}>
-                        <FormattedMessage
-                            id={'global.editButton'}
-                            defaultMessage={'Editar'}
+            <div className={styles.container}>
+                <div className={styles.cardHeader}>
+                    <LinkButton
+                        onClick={handleEditShipping}
+                        className={classes.editButton}
+                        data-cy="ShippingInformation-editButton"
+                    >
+                        <Icon
+                            size={16}
+                            src={EditIcon}
+                            classes={{ icon: classes.editIcon }}
                         />
-                    </span>
-                </LinkButton>
+                        <span className={classes.editText}>
+                            <FormattedMessage
+                                id={'global.editButton'}
+                                defaultMessage={'Editar'}
+                            />
+                        </span>
+                    </LinkButton>
+                </div>
+                <Card shippingData={shippingData} />
+                {editModal}
             </div>
-            <Card shippingData={shippingData} />
-            {editModal}
         </Fragment>
     ) : (
         <Fragment>
@@ -99,7 +103,7 @@ const ShippingInformation = props => {
     );
 
     return (
-        <div className={rootClassName} data-cy="ShippingInformation-root">
+        <div className={styles.root} data-cy="ShippingInformation-root">
             {shippingInformation}
         </div>
     );

@@ -21,6 +21,12 @@
   gap: 1rem;
 
   max-width: 20rem;
+
+  label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--blue);
+  }
 }
 
 .wrapperCardBox {
@@ -32,6 +38,29 @@
     border: 1px solid #d7d7d7;
     border-radius: 4px;
     padding: .4rem;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+  }
+}
+
+.boxRadio {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem !important;
+
+  input[type=radio] {
+    height: 1.5em;
+    width: 1.5rem;
+  }
+
+  label {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  
+  input[type="radio"]:checked {
+    accent-color: var(--blue);
   }
 }
 
@@ -43,8 +72,8 @@ input[type=text], input[type=numeric], input[type=date], input[type=number]{
   padding: .6rem;
 }
 
-.buttonBoleto {
-  padding: 1.5rem;
+.buttonStyled {
+  padding: 1rem 1.5rem;
   font-size: 1rem;
   color: #fff;
   font-weight: 700;

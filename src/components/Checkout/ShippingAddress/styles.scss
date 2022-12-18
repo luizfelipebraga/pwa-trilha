@@ -1,0 +1,19 @@
+.root {
+  max-width: 600px;
+  border: 1px solid #d7d7d7;
+  padding: 1rem;
+
+  color: var(--blue);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+}
