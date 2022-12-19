@@ -2,9 +2,10 @@ import React, { Fragment, Suspense } from 'react';
 import { shape, string } from 'prop-types';
 import { Link, Route } from 'react-router-dom';
 
-import TruckLogo from 'node_modules/@magento/venia-ui/lib/components/Logo/logo.svg';
+import TruckLogo from '@magento/venia-ui/lib/components/Logo/logo.svg';
 
 import WhiteCheck from './images/check.svg';
+import ScaniaLogo from './images/scania.png';
 
 import Logo from '@magento/venia-ui/lib/components/Logo/index';
 import AccountTrigger from '@magento/venia-ui/lib/components/Header/accountTrigger';
@@ -102,7 +103,7 @@ const Header = props => {
                             className={classes.logoContainer}
                             data-cy="Header-logoContainer"
                         >
-                            <Logo src={TruckLogo} classes={{ logo: styles.logo }} />
+                            <Logo src={ScaniaLogo} classes={{ logo: styles.logo }} />
                         </Link>
 
                         <div className={styles.containerRadio}>

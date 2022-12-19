@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from "react-router-dom";
 import { useIntl } from 'react-intl';
+import { ArrowDown, ArrowUp } from 'react-feather';
 import styles from './styles.scss';
 
 import VisaImg from '../../../assets/visa.png';
@@ -8,6 +9,7 @@ import VisaImg from '../../../assets/visa.png';
 export function CheckoutPaymentPage() {
   const { state } = useLocation();
   const { formatMessage } = useIntl();
+  const orderData = state;
 
   const [paymentRadio, setPaymentRadio] = useState(1);
 
@@ -15,6 +17,9 @@ export function CheckoutPaymentPage() {
   const [cardHolder, setCardHolders] = useState('');
   const [expireDate, setExpireDate] = useState('');
   const [cvvNumber, setCvvNumber] = useState('');
+  const [isArrowOpen, setIsArrowOpen] = useState(false);
+
+  const ArrowIcon = isArrowOpen ? <ArrowUp /> : <ArrowDown />
 
   const handleCardDisplay = () => {
     const rawText = [...card.split(' ').join('')] // Remove old space
@@ -26,6 +31,22 @@ export function CheckoutPaymentPage() {
     return creditCard.join('') // Transform card array to string
   }
 
+  const verifyProductAmount = () => {
+    let index = 0;
+    for (let value of orderData) {
+      if (value.quantity != 1) {
+        index = (index + value.quantity) - 1;
+      }
+    }
+    return index;
+  }
+
+  const handleArrowClick = () => {
+    setIsArrowOpen(!isArrowOpen);
+  }
+
+  const titleCard = orderData.length > 1 ? <span>Produtos</span> : orderData[0].quantity > 1 ? <span>Produtos</span> : <span>Produto</span>;
+  const orderResumeQnt = verifyProductAmount();
   console.log('CheckoutAddressPage', state);
 
   const heading = formatMessage({
@@ -83,21 +104,30 @@ export function CheckoutPaymentPage() {
 
   return (
     <div className={styles.root}>
-      <h1 className={styles.checkoutTitle}>{heading}</h1>
-      <ul>
-        <li className={styles.boxRadio}>
-          <input type="radio" id="boleto" checked={paymentRadio === 1} name="boleto" value={1} onClick={() => setPaymentRadio(1)} />
-          <label for="boleto">Boleto</label>
-        </li>
+      <div className={styles.wrappingContent}>
+        <div>
+          <h1 className={styles.checkoutTitle}>{heading}</h1>
+          <ul>
+            <li className={styles.boxRadio}>
+              <input type="radio" id="boleto" checked={paymentRadio === 1} name="boleto" value={1} onClick={() => setPaymentRadio(1)} />
+              <label for="boleto">Boleto</label>
+            </li>
 
-        <li className={styles.boxRadio}>
-          <input type="radio" id="credito" name="credito" checked={paymentRadio === 0} value={0} onClick={() => setPaymentRadio(0)} />
-          <label for="credito">Cartão de Crédito</label>
-        </li>
-      </ul>
+            <li className={styles.boxRadio}>
+              <input type="radio" id="credito" name="credito" checked={paymentRadio === 0} value={0} onClick={() => setPaymentRadio(0)} />
+              <label for="credito">Cartão de Crédito</label>
+            </li>
+          </ul>
 
-      {paymentRadio === 0 ? creditCardForm : boletoForm}
+          {paymentRadio === 0 ? creditCardForm : boletoForm}
+        </div>
 
+        <aside className={styles.aside}>
+          <h2>Resumo do Pedido</h2>
+          <div className={styles.wrapperProductsLength}><span>{orderResumeQnt + orderData.length}  {titleCard}</span> <div onClick={handleArrowClick}>{ArrowIcon}</div></div>
+        </aside>
+
+      </div>
     </div>
   )
 }

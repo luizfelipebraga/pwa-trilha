@@ -15,6 +15,24 @@
   }
 }
 
+.wrappingContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.aside {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  height: auto;
+  align-self: flex-start;
+
+  .wrapperProductsLength {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+}
+
 .formPayment {
   display: flex;
   flex-direction: column;
