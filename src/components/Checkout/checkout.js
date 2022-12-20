@@ -250,8 +250,6 @@ const CheckoutPage = props => {
                 </div>
             ) : null;
 
-        console.log('handleReviewOrder', handleReviewOrder)
-
         const reviewOrderButton =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
                 <Button

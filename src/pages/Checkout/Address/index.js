@@ -14,9 +14,6 @@ export function CheckoutAddressPage() {
 
   const orderData = state;
 
-  console.log('orderData', orderData);
-  console.log('orderData:', orderData[0]);
-
   const heading = formatMessage({
     id: 'checkoutPage.clientCheckoutAddress',
     defaultMessage: 'Endereco de Entrega'

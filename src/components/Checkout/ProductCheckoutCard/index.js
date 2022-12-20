@@ -11,7 +11,7 @@ export function ProductCheckoutCard({ img, productName, price, qtd, }) {
         <div className={styles.boxPrice}>
           <span>{`R$ ${price},00`}</span>
           <input type="text" value={qtd} />
-          <span>{`R$ ${price},00`}</span>
+          <span>{`R$ ${price*qtd},00`}</span>
         </div>
       </div>
     </div>

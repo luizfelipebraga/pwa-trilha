@@ -20,8 +20,6 @@ const ShippingSummary = props => {
     // if (!data.length || !data) {
     //     return null;
     // }
-    console.log('SHIPPING:', data)
-    console.log('currencyCode:', currencyCode)
     const shipping = data;
 
     const shippingLabel = isCheckout

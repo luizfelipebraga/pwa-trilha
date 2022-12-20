@@ -109,7 +109,7 @@ const Header = props => {
                         <div className={styles.containerRadio}>
                             <div className={styles.boxRadio}>
                                 <div className={styles.checkedAddress}>
-                                    <img src={WhiteCheck} alt="white check icon"/>
+                                    <img src={WhiteCheck} alt="white check icon" />
                                 </div>
                                 <label htmlFor="entrega" id='entrega'>Entrega</label>
                             </div>
@@ -119,6 +119,41 @@ const Header = props => {
                             <div className={styles.boxRadio}>
                                 <input type="radio" id="pagamento" name="pagamento" checked={true} />
                                 <label htmlFor="pagamento" id='entrega'>Pagamento</label>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+            )
+        }
+
+        else if (window.location.pathname === '/checkout-success') {
+            return (
+                <div className={styles.container}>
+                    <header className={styles.root} data-cy="Header-root">
+                        <Link
+                            aria-label={title}
+                            to={resourceUrl('/')}
+                            className={classes.logoContainer}
+                            data-cy="Header-logoContainer"
+                        >
+                            <Logo src={ScaniaLogo} classes={{ logo: styles.logo }} />
+                        </Link>
+
+                        <div className={styles.containerRadio}>
+                            <div className={styles.boxRadio}>
+                                <div className={styles.checkedAddress}>
+                                    <img src={WhiteCheck} alt="white check icon" />
+                                </div>
+                                <label htmlFor="entrega" id='entrega'>Entrega</label>
+                            </div>
+
+                            <div className={styles.line} />
+
+                            <div className={styles.boxRadio}>
+                                <div className={styles.checkedAddress}>
+                                    <img src={WhiteCheck} alt="white check icon" />
+                                </div>
+                                <label htmlFor="pagamento" id='pagamento'>Pagamento</label>
                             </div>
                         </div>
                     </header>

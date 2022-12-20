@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useIntl } from 'react-intl';
 import { ArrowDown, ArrowUp } from 'react-feather';
 import styles from './styles.scss';
 
+import { useMiniCart } from '@magento/peregrine/lib/talons/MiniCart/useMiniCart';
+import operations from '@magento/venia-ui/lib/components/MiniCart/miniCart.gql';
+import { useItem } from '@magento/peregrine/lib/talons/MiniCart/useItem';
+
+
 import VisaImg from '../../../assets/visa.png';
+import { CardOrderSummaryPayment } from '../../../components/Checkout/OrderSummaryPayment';
 
 export function CheckoutPaymentPage() {
   const { state } = useLocation();
   const { formatMessage } = useIntl();
+  let history = useHistory();
   const orderData = state;
+  console.log('orderData', orderData)
 
   const [paymentRadio, setPaymentRadio] = useState(1);
 
@@ -18,6 +26,20 @@ export function CheckoutPaymentPage() {
   const [expireDate, setExpireDate] = useState('');
   const [cvvNumber, setCvvNumber] = useState('');
   const [isArrowOpen, setIsArrowOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+
+  const talonProps = useMiniCart({ isOpen, setIsOpen, operations });
+
+  const {
+    handleRemoveItem
+  } = talonProps;
+
+  const handleRemoveArrayItem = async () => {
+    for (let value of orderData) {
+      const { uid } = value;
+      await handleRemoveItem(uid);
+    }
+  }
 
   const ArrowIcon = isArrowOpen ? <ArrowUp /> : <ArrowDown />
 
@@ -45,9 +67,20 @@ export function CheckoutPaymentPage() {
     setIsArrowOpen(!isArrowOpen);
   }
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await handleRemoveArrayItem();
+    history.push('/checkout-success');
+  }
+
+  const hundlePrice = (number) => {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(number);
+  }
+
   const titleCard = orderData.length > 1 ? <span>Produtos</span> : orderData[0].quantity > 1 ? <span>Produtos</span> : <span>Produto</span>;
   const orderResumeQnt = verifyProductAmount();
-  console.log('CheckoutAddressPage', state);
+  const shippingFormatted = hundlePrice(orderData.shipping);
+  const totalValue = hundlePrice(orderData.total.value);
 
   const heading = formatMessage({
     id: 'checkoutPage.clientCheckoutAddress',
@@ -59,13 +92,12 @@ export function CheckoutPaymentPage() {
   )
 
   const creditCardForm = (
-    <form className={styles.formPayment}>
+    <form className={styles.formPayment} onSubmit={handleSubmit}>
       <div>
         <label>CARD NUMBER</label>
         <div className={styles.wrapperCardBox}>
           <input id="creditCardInput"
             maxLength={20}
-            pattern="[0-9]"
             type="numeric"
             value={handleCardDisplay()}
             onChange={(e) => setCard(e.target.value)}
@@ -77,7 +109,7 @@ export function CheckoutPaymentPage() {
 
       <div>
         <label htmlFor="cardHolder" id='cardHolder'>CARDHOLDER NAME</label>
-        <input id="cardHolder" value={cardHolder} type="text" placeholder='John Doe' onChange={(event) => setCardHolders(event.target.value)} />
+        <input id="cardHolder" value={cardHolder} type="text" placeholder='John Doe' onChange={(event) => setCardHolders(event.target.value)} required />
       </div>
 
       <div>
@@ -88,16 +120,17 @@ export function CheckoutPaymentPage() {
           value={expireDate}
           onChange={(event) => setExpireDate(event.target.value)}
           maxlength={6}
+          required
         />
       </div>
 
       <div>
         <label htmlFor="cvv" id='cvv'>CVV</label>
-        <input id="cvv" value={cvvNumber} type="text" placeholder='123' maxLength={3} onChange={(event) => setCvvNumber(event.target.value)} />
+        <input id="cvv" value={cvvNumber} type="text" placeholder='123' maxLength={3} onChange={(event) => setCvvNumber(event.target.value)} required />
       </div>
 
       <div>
-        <button className={styles.buttonStyled}>Fazer a compra</button>
+        <button className={styles.buttonStyled} type="submit">Fazer a compra</button>
       </div>
     </form>
   )
@@ -124,7 +157,16 @@ export function CheckoutPaymentPage() {
 
         <aside className={styles.aside}>
           <h2>Resumo do Pedido</h2>
+
+          <div className={styles.orderSummary}>
+            <span>Frete : {shippingFormatted}</span>
+            <span>Total : <strong>{totalValue}</strong></span>
+          </div>
+
           <div className={styles.wrapperProductsLength}><span>{orderResumeQnt + orderData.length}  {titleCard}</span> <div onClick={handleArrowClick}>{ArrowIcon}</div></div>
+          {isArrowOpen && orderData.map(({ product, quantity }, i) => (
+            <CardOrderSummaryPayment key={i} name={product.name} url={product.thumbnail.url} qty={quantity} />
+          ))}
         </aside>
 
       </div>

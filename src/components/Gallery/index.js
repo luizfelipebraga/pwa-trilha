@@ -51,8 +51,6 @@ const GalleryItem = props => {
     // eslint-disable-next-line no-unused-vars
     const { name, price_range, small_image, url_key, rating_summary } = item;
 
-    console.log('item:', item);
-
     const { url: smallImageURL } = small_image;
     const productLink = resourceUrl(`/${url_key}${productUrlSuffix || ''}`);
 
@@ -94,6 +92,7 @@ const GalleryItem = props => {
             aria-live="polite"
             aria-busy="false"
             ref={itemRef}
+            style={{marginBottom: '2rem'}}
         >
             <Link
                 onClick={handleLinkClick}
