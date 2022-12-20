@@ -3,12 +3,27 @@
   height: 60vh;
 
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
+  transition: all .4s ease-in-out;
 
   span {
     font-size: 2rem;
     font-weight: 700;
     color: var(--blue);
   }
+}
+
+.BoxCheckImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #d7d7d7;
+
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+
 }

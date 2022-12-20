@@ -6,7 +6,8 @@ import { useCheckoutPage } from '@magento/peregrine/lib/talons/CheckoutPage/useC
 import ScrollAnchor from '@magento/venia-ui/lib/components/ScrollAnchor/scrollAnchor';
 import ShippingInformation from '@magento/venia-ui/lib/components/CheckoutPage/ShippingInformation';
 import AddressBook from '@magento/venia-ui/lib/components/CheckoutPage/AddressBook';
-import { usePriceSummary } from '@magento/peregrine/lib/talons/CartPage/PriceSummary/usePriceSummary';
+import { CardOrderSummaryPayment } from '../../../components/Checkout/OrderSummaryPayment';
+import { ArrowDown, ArrowUp } from 'react-feather';
 
 export function CheckoutAddressPage() {
   const { state } = useLocation();
@@ -24,6 +25,10 @@ export function CheckoutAddressPage() {
     defaultMessage: 'Método de Entrega'
   })
 
+  const [isArrowOpen, setIsArrowOpen] = useState(false);
+  const ArrowIcon = isArrowOpen ? <ArrowUp /> : <ArrowDown />
+
+
   const talonProps = useCheckoutPage();
 
   const {
@@ -36,11 +41,10 @@ export function CheckoutAddressPage() {
     toggleSignInContent
   } = talonProps;
 
-  // const { flatData } = usePriceSummary();
-  // const { shipping } = flatData;
 
-  // let currencyCode = shipping[0].selected_shipping_method.amount.currency;
-  // let sedex = shipping[0].selected_shipping_method.amount.value;
+  const handleArrowClick = () => {
+    setIsArrowOpen(!isArrowOpen);
+  }
 
   const verifyProductAmount = () => {
     let index = 0;
@@ -80,9 +84,12 @@ export function CheckoutAddressPage() {
           </ScrollAnchor>
         </div>
 
-        <aside>
+        <aside className={styles.aside}>
           <h2>Resumo do Pedido</h2>
-          <span>{orderResumeQnt + orderData.length}  {titleCard}</span>
+          <div className={styles.wrapperProductsLength}><span>{orderResumeQnt + orderData.length}  {titleCard}</span> <div onClick={handleArrowClick}>{ArrowIcon}</div></div>
+          {isArrowOpen && orderData.map(({ product, quantity }, i) => (
+            <CardOrderSummaryPayment key={i} name={product.name} url={product.thumbnail.url} qty={quantity} />
+          ))}
         </aside>
       </div>
       {addressBookElement}

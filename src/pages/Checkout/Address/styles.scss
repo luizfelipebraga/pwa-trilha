@@ -19,11 +19,29 @@
     flex: 1;
   }
 
-  aside {
+  .aside {
     background-color: #f4f4f4;
+    max-width: 20rem;
     padding: 2rem;
     height: auto;
     align-self: flex-start;
+
+    .wrapperProductsLength {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      transition: all 1s ease-in-out;
+      border-bottom: 1px solid #d7d7d7;
+  
+      >span {
+        flex: 1;
+      }
+  
+      >div {
+        transition: all 1s ease-in-out;
+        cursor: pointer;
+      }
+    }
   }
 }
 

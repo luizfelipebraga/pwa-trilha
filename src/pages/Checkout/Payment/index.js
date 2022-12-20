@@ -6,7 +6,6 @@ import styles from './styles.scss';
 
 import { useMiniCart } from '@magento/peregrine/lib/talons/MiniCart/useMiniCart';
 import operations from '@magento/venia-ui/lib/components/MiniCart/miniCart.gql';
-import { useItem } from '@magento/peregrine/lib/talons/MiniCart/useItem';
 
 
 import VisaImg from '../../../assets/visa.png';
@@ -34,7 +33,7 @@ export function CheckoutPaymentPage() {
     handleRemoveItem
   } = talonProps;
 
-  const handleRemoveArrayItem = async () => {
+  const handleRemoveOrderItems = async () => {
     for (let value of orderData) {
       const { uid } = value;
       await handleRemoveItem(uid);
@@ -67,9 +66,9 @@ export function CheckoutPaymentPage() {
     setIsArrowOpen(!isArrowOpen);
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    await handleRemoveArrayItem();
+    handleRemoveOrderItems();
     history.push('/checkout-success');
   }
 
